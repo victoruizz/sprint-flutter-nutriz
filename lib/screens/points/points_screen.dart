@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../data/mock_pontos.dart';
-import '../../models/ponto_coleta.dart';
 import '../../widgets/section_card.dart';
 import 'point_detail_screen.dart';
 
