@@ -141,6 +141,29 @@ lib/
 
 ---
 
+## Roteiro de gravação do vídeo
+
+Ordem sugerida para evidenciar todos os fluxos (grave com o app rodando no
+emulador):
+
+1. Abrir o app → **Splash** → "Começar" → **Landing** (rolar mostrando "como
+   funciona" e impacto).
+2. **Login** → escolher **Doadora** → preencher e-mail/senha → "Entrar" (mostrar
+   o SnackBar de sucesso).
+3. **Início** → tocar na doação em andamento → **Detalhe** (mostrar a timeline).
+4. Voltar → aba **Pontos** → abrir um ponto → "Solicitar coleta" (SnackBar).
+5. Aba **Conteúdo** → abrir um artigo (passagem de parâmetro).
+6. Botão flutuante da **EVA** → tocar uma sugestão → mostrar "digitando" e a
+   resposta → escrever uma pergunta.
+7. Aba **Perfil** → mostrar dados → "Sair".
+8. **Login** de novo → **Admin** → **Painel** (indicadores) → **Gestão de
+   doações** → **Usuários** → abrir um usuário.
+9. **Sair** → **Login** → **Enfermeiro** → **Agendamentos** → abrir um → "Preencher
+   relatório" (SnackBar).
+10. (Opcional) Login como Doadora → **Cadastro** → preencher → tela de sucesso.
+
+---
+
 ## Observação
 
 App para fins acadêmicos (Sprint FIAP). Todo conteúdo de saúde é informativo e
