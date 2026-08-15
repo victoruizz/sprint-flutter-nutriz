@@ -1,0 +1,19 @@
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+.pub-cache/
+.pub/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Gerado por flutter create (plataformas) - opcional versionar
+# android/ e ios/ podem ser regenerados com `flutter create --platforms=android .`
+
+# Sistema
+.DS_Store
