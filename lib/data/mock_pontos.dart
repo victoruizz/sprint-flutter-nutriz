@@ -1,0 +1,55 @@
+import '../models/ponto_coleta.dart';
+
+/// Pontos de coleta / bancos de leite (mock) com bairros reais de Sao Paulo.
+const List<PontoColeta> pontosMock = [
+  PontoColeta(
+    nome: 'Lactare - Banco de Leite Humano',
+    endereco: 'Av. Cesario de Abreu, 350',
+    bairro: 'Centro',
+    cidade: 'Itapevi',
+    distanciaKm: 2.4,
+    aberto: true,
+    coletaDomiciliar: true,
+    horario: 'Seg a Sex, 8h as 17h',
+  ),
+  PontoColeta(
+    nome: 'Banco de Leite Amparo Maternal',
+    endereco: 'Av. Nazare, 1546',
+    bairro: 'Ipiranga',
+    cidade: 'Sao Paulo',
+    distanciaKm: 5.1,
+    aberto: true,
+    coletaDomiciliar: true,
+    horario: 'Todos os dias, 7h as 19h',
+  ),
+  PontoColeta(
+    nome: 'Posto de Coleta Hospital das Clinicas',
+    endereco: 'Av. Dr. Eneas de Carvalho Aguiar, 255',
+    bairro: 'Cerqueira Cesar',
+    cidade: 'Sao Paulo',
+    distanciaKm: 6.8,
+    aberto: false,
+    coletaDomiciliar: false,
+    horario: 'Seg a Sex, 8h as 16h',
+  ),
+  PontoColeta(
+    nome: 'Banco de Leite Santa Casa de Sao Paulo',
+    endereco: 'R. Dr. Cesario Motta Junior, 112',
+    bairro: 'Vila Buarque',
+    cidade: 'Sao Paulo',
+    distanciaKm: 7.3,
+    aberto: true,
+    coletaDomiciliar: false,
+    horario: 'Seg a Sab, 8h as 18h',
+  ),
+  PontoColeta(
+    nome: 'Posto de Coleta Hospital Sao Luiz',
+    endereco: 'R. Eng. Oscar Americano, 840',
+    bairro: 'Itaim Bibi',
+    cidade: 'Sao Paulo',
+    distanciaKm: 9.0,
+    aberto: true,
+    coletaDomiciliar: true,
+    horario: 'Seg a Sex, 9h as 18h',
+  ),
+];
