@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import '../../core/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../models/perfil.dart';
 import '../../widgets/nutriz_logo.dart';
+import '../adm/adm_shell.dart';
+import '../home/home_shell.dart';
+import '../nurse/nurse_shell.dart';
 
-/// Login mockado: valida o formato dos campos; qualquer credencial valida entra.
+/// Login mockado: valida o formato dos campos e permite escolher o perfil
+/// (doadora, administrador ou enfermeiro) para explorar cada area do app.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -19,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _senhaCtrl = TextEditingController();
   bool _carregando = false;
   bool _ocultarSenha = true;
+  PerfilUsuario _perfil = PerfilUsuario.nutriz;
 
   @override
   void dispose() {
@@ -30,22 +36,34 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _entrar() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _carregando = true);
-    // Simula a autenticacao (mock, sem backend real).
     await Future.delayed(const Duration(milliseconds: 900));
     if (!mounted) return;
     setState(() => _carregando = false);
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Bem-vinda de volta!'),
+        content: Text('Login realizado com sucesso!'),
         backgroundColor: AppColors.teal,
       ),
     );
-    Navigator.pushReplacementNamed(context, AppRoutes.home);
+    final Widget destino = switch (_perfil) {
+      PerfilUsuario.nutriz => const HomeShell(),
+      PerfilUsuario.adm => const AdmShell(),
+      PerfilUsuario.nurse => const NurseShell(),
+    };
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => destino),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        foregroundColor: AppColors.navy,
+        elevation: 0,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(AppSpacing.lg),
@@ -54,7 +72,6 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(height: AppSpacing.xl),
                 const Center(child: NutrizLogo(size: 56)),
                 const SizedBox(height: AppSpacing.xl),
                 const Text(
@@ -67,8 +84,32 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 4),
                 const Text(
-                  'Acesse sua conta de nutriz doadora.',
+                  'Escolha um perfil para explorar o app.',
                   style: TextStyle(color: AppColors.muted),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: SegmentedButton<PerfilUsuario>(
+                    showSelectedIcon: false,
+                    segments: const [
+                      ButtonSegment(
+                        value: PerfilUsuario.nutriz,
+                        label: Text('Doadora'),
+                      ),
+                      ButtonSegment(
+                        value: PerfilUsuario.adm,
+                        label: Text('Admin'),
+                      ),
+                      ButtonSegment(
+                        value: PerfilUsuario.nurse,
+                        label: Text('Enferm.'),
+                      ),
+                    ],
+                    selected: {_perfil},
+                    onSelectionChanged: (s) =>
+                        setState(() => _perfil = s.first),
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.lg),
                 TextFormField(

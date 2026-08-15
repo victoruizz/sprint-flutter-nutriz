@@ -15,3 +15,10 @@ String dataBr(DateTime d) {
 String dataExtenso(DateTime d) {
   return '${d.day} de ${_meses[d.month - 1]} de ${d.year}';
 }
+
+/// Ex.: 14/08/2026 as 10:00
+String dataHoraBr(DateTime d) {
+  final hh = d.hour.toString().padLeft(2, '0');
+  final min = d.minute.toString().padLeft(2, '0');
+  return '${dataBr(d)} as $hh:$min';
+}
