@@ -8,7 +8,12 @@ import '../../widgets/chat_bubble.dart';
 import '../../widgets/suggestion_chip.dart';
 
 class EvaChatScreen extends StatefulWidget {
-  const EvaChatScreen({super.key});
+  /// Pergunta enviada automaticamente ao abrir o chat. E o que acontece no
+  /// produto real quando a nutriz toca num chip de sugestao da landing:
+  /// o texto ja entra como primeira mensagem dela.
+  final String? perguntaInicial;
+
+  const EvaChatScreen({super.key, this.perguntaInicial});
 
   @override
   State<EvaChatScreen> createState() => _EvaChatScreenState();
@@ -21,6 +26,15 @@ class _EvaChatScreenState extends State<EvaChatScreen> {
     const MensagemEva(texto: evaSaudacao, daEva: true),
   ];
   bool _digitando = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final pergunta = widget.perguntaInicial;
+    if (pergunta != null && pergunta.trim().isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _enviar(pergunta));
+    }
+  }
 
   @override
   void dispose() {

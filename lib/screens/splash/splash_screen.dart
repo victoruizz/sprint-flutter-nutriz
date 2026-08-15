@@ -20,7 +20,7 @@ class SplashScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Spacer(),
-                const Center(child: NutrizLogo(size: 76, light: true)),
+                const Center(child: NutrizLogo(altura: 48)),
                 const SizedBox(height: AppSpacing.xl),
                 const Text(
                   'Doar leite materno e um gesto de amor que salva vidas.',

@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Center(child: NutrizLogo(size: 56)),
+                const Center(child: NutrizLogo(altura: 36, light: false)),
                 const SizedBox(height: AppSpacing.xl),
                 const Text(
                   'Entrar',

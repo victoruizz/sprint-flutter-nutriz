@@ -1,98 +1,274 @@
+import 'package:flutter/material.dart';
+
 import '../models/artigo.dart';
+
+/// Conteudo educativo do Nutriz, com os mesmos artigos, autores e capas do
+/// web-nutriz (src/pages/public/articles/data.ts). Textos condensados para o
+/// formato mobile, mantendo a orientacao rBLH/Fiocruz do produto real.
+
+const Color _corAmamentacao = Color(0xFF14B8A6);
+const Color _fundoAmamentacao = Color(0xFFCCFBF1);
+const Color _corNutricao = Color(0xFF65A30D);
+const Color _fundoNutricao = Color(0xFFECFCCB);
+const Color _corAcolhimento = Color(0xFFE0457A);
+const Color _fundoAcolhimento = Color(0xFFFDF1F5);
+const Color _corCuidados = Color(0xFF3B82F6);
+const Color _fundoCuidados = Color(0xFFDBEAFE);
 
 const List<Artigo> artigosMock = [
   Artigo(
-    titulo: 'Doar leite diminui o leite do meu bebe?',
+    titulo: 'Como armazenar e transportar seu leite com seguranca',
     categoria: 'Amamentacao',
+    autor: 'Dra. Mariana Costa',
+    resumo:
+        'Frasco certo, prazos de congelamento e transporte ate o banco de '
+        'leite - o passo a passo completo.',
+    minutosLeitura: 4,
+    imagem: 'assets/artigos/armazenamento-leite.jpg',
+    corCategoria: _corAmamentacao,
+    fundoCategoria: _fundoAmamentacao,
+    secoes: [
+      SecaoArtigo(
+        subtitulo: 'O frasco ideal',
+        texto:
+            'Use sempre frascos de vidro com tampa plastica rosqueavel. Eles '
+            'devem ser esterilizados antes do uso: ferva o vidro e a tampa por '
+            '15 minutos e deixe secar naturalmente sobre um pano limpo. '
+            'Identifique cada frasco com a data e a hora da primeira coleta.',
+      ),
+      SecaoArtigo(
+        subtitulo: 'Congelamento e prazos',
+        texto:
+            'Apos a coleta, leve o frasco imediatamente ao freezer. O leite cru '
+            'congelado pode ser armazenado por ate 15 dias. Voce pode completar '
+            'o mesmo frasco em coletas diferentes do mesmo dia, desde que o '
+            'leite novo seja resfriado antes. Nunca armazene o leite na porta '
+            'da geladeira ou do freezer - a variacao de temperatura compromete '
+            'a qualidade.',
+      ),
+      SecaoArtigo(
+        subtitulo: 'O transporte ate o banco de leite',
+        texto:
+            'O transporte deve ser feito em caixa termica com gelo. Muitos '
+            'bancos de leite oferecem busca domiciliar - consulte o posto de '
+            'coleta mais proximo. O importante e que o leite nao descongele no '
+            'caminho.',
+      ),
+    ],
+  ),
+  Artigo(
+    titulo: 'Alimentacao da nutriz: o que comer durante a doacao',
+    categoria: 'Nutricao',
+    autor: 'Dra. Mariana Costa',
+    resumo:
+        'Nao existe dieta especial para doar. O que importa e uma alimentacao '
+        'variada e boa hidratacao.',
+    minutosLeitura: 5,
+    imagem: 'assets/artigos/alimentacao-nutriz.jpg',
+    corCategoria: _corNutricao,
+    fundoCategoria: _fundoNutricao,
+    secoes: [
+      SecaoArtigo(
+        subtitulo: 'Comida de verdade, sem dieta restritiva',
+        texto:
+            'A lactacao aumenta a necessidade de energia, mas isso nao exige '
+            'cardapio especial. Priorize refeicoes variadas com frutas, '
+            'legumes, cereais integrais, feijoes e fontes de proteina ao longo '
+            'do dia.',
+      ),
+      SecaoArtigo(
+        subtitulo: 'Hidratacao',
+        texto:
+            'Beba agua sempre que sentir sede e mantenha um copo por perto '
+            'durante as mamadas e a ordenha. Nao e preciso forcar volumes '
+            'exagerados.',
+      ),
+      SecaoArtigo(
+        subtitulo: 'Duvidas sobre restricoes',
+        texto:
+            'Restricoes alimentares so fazem sentido quando ha indicacao '
+            'individual. Converse com a equipe Lactare ou com quem acompanha '
+            'o seu pre-natal antes de cortar grupos de alimentos.',
+      ),
+    ],
+  ),
+  Artigo(
+    titulo: 'Nao pode doar? Veja como voce ainda pode ajudar',
+    categoria: 'Acolhimento',
     autor: 'Equipe Lactare',
     resumo:
-        'A producao de leite funciona por demanda. Entenda por que doar nao prejudica a amamentacao do seu bebe.',
+        'Existem varias formas de apoiar a rede de bancos de leite mesmo sem '
+        'doar leite.',
     minutosLeitura: 3,
+    imagem: 'assets/artigos/apoio-sem-doar.jpg',
+    corCategoria: _corAcolhimento,
+    fundoCategoria: _fundoAcolhimento,
+    secoes: [
+      SecaoArtigo(
+        subtitulo: 'Doar frascos e divulgar',
+        texto:
+            'Frascos de vidro esterilizados sao sempre necessarios nos bancos '
+            'de leite. Divulgar a doacao entre amigas e nas redes tambem '
+            'alcanca novas doadoras.',
+      ),
+      SecaoArtigo(
+        subtitulo: 'Apoiar quem doa',
+        texto:
+            'Acolher uma nutriz que esta doando - ajudando com a rotina, com o '
+            'bebe ou apenas ouvindo - faz diferenca real na continuidade da '
+            'doacao.',
+      ),
+    ],
+  ),
+  Artigo(
+    titulo: 'Higiene na ordenha: passo a passo da rBLH',
+    categoria: 'Cuidados',
+    autor: 'Equipe Lactare',
+    resumo:
+        'O protocolo de higiene que garante a seguranca do leite doado, do '
+        'ambiente ao frasco.',
+    minutosLeitura: 6,
+    imagem: 'assets/artigos/higiene-ordenha.jpg',
+    corCategoria: _corCuidados,
+    fundoCategoria: _fundoCuidados,
+    secoes: [
+      SecaoArtigo(
+        subtitulo: 'Antes de comecar',
+        texto:
+            'Escolha um local limpo e tranquilo. Prenda os cabelos, use touca '
+            'ou lenco e mascara, retire aneis e pulseiras e lave bem as maos e '
+            'os antebracos com agua e sabao.',
+      ),
+      SecaoArtigo(
+        subtitulo: 'Durante a ordenha',
+        texto:
+            'Despreze os primeiros jatos de leite. Evite falar, espirrar ou '
+            'tossir sobre o frasco. Massageie a mama em movimentos circulares '
+            'antes de iniciar para facilitar a saida do leite.',
+      ),
+      SecaoArtigo(
+        subtitulo: 'Depois',
+        texto:
+            'Feche bem o frasco, identifique com data e hora e leve '
+            'imediatamente ao freezer. Lave o material utilizado com agua e '
+            'sabao e deixe secar naturalmente.',
+      ),
+    ],
+  ),
+  Artigo(
+    titulo: 'Excesso de leite: transforme o que sobra em doacao',
+    categoria: 'Amamentacao',
+    autor: 'Dra. Mariana Costa',
+    resumo:
+        'Se voce produz mais do que o seu bebe consome, esse leite pode salvar '
+        'um prematuro.',
+    minutosLeitura: 4,
+    imagem: 'assets/artigos/excesso-de-leite.jpg',
+    corCategoria: _corAmamentacao,
+    fundoCategoria: _fundoAmamentacao,
     secoes: [
       SecaoArtigo(
         subtitulo: 'Producao por demanda',
         texto:
-            'Nao. A producao funciona por demanda: o que e retirado a mais tende a estimular ainda mais a producao. Seu corpo repoe o que foi ordenhado.',
+            'A producao de leite se ajusta a demanda. Retirar o excedente com '
+            'regularidade nao tira o leite do seu bebe - o corpo repoe conforme '
+            'o estimulo.',
       ),
       SecaoArtigo(
-        subtitulo: 'Fique atenta',
+        subtitulo: 'Alivio e conforto',
         texto:
-            'Se notar qualquer mudanca na amamentacao, converse com o banco de leite. A equipe acompanha voce em todo o processo.',
-      ),
-    ],
-  ),
-  Artigo(
-    titulo: 'Como armazenar o leite ordenhado',
-    categoria: 'Ordenha',
-    autor: 'Equipe Lactare',
-    resumo:
-        'Congelamento, identificacao do frasco e o prazo de validade do leite congelado.',
-    minutosLeitura: 4,
-    secoes: [
-      SecaoArtigo(
-        subtitulo: 'Congele imediatamente',
-        texto:
-            'O frasco vai ao freezer logo apos a coleta - nunca na porta da geladeira, onde a temperatura oscila.',
-      ),
-      SecaoArtigo(
-        subtitulo: 'Identifique cada frasco',
-        texto:
-            'Escreva a data e a hora da primeira coleta na tampa. Isso evita perder o prazo de 15 dias do leite congelado cru.',
-      ),
-      SecaoArtigo(
-        subtitulo: 'Deixe espaco no frasco',
-        texto:
-            'Nao encha ate a borda: deixe cerca de 1 cm livre, porque o leite expande ao congelar e pode quebrar o frasco.',
+            'Ordenhar o excesso tambem ajuda a aliviar o ingurgitamento '
+            'mamario. Se houver dor persistente, vermelhidao ou febre, procure '
+            'avaliacao profissional.',
       ),
     ],
   ),
   Artigo(
-    titulo: 'Preciso fazer exames para doar?',
-    categoria: 'Doacao',
+    titulo: 'Quem pode doar? Criterios de saude e triagem',
+    categoria: 'Cuidados',
     autor: 'Equipe Lactare',
     resumo:
-        'O que a triagem avalia e por que os exames do pre-natal costumam bastar.',
-    minutosLeitura: 2,
+        'Os criterios usados na triagem de doadoras e quais exames sao '
+        'solicitados.',
+    minutosLeitura: 5,
+    imagem: 'assets/artigos/triagem-doacao.jpg',
+    corCategoria: _corCuidados,
+    fundoCategoria: _fundoCuidados,
     secoes: [
       SecaoArtigo(
-        subtitulo: 'Exames do pre-natal',
+        subtitulo: 'Criterios gerais',
         texto:
-            'Alguns exames ja feitos no pre-natal costumam ser suficientes. A equipe do banco de leite avalia caso a caso durante a triagem.',
+            'Podem doar nutrizes saudaveis, que amamentam e tem leite '
+            'excedente, sem uso de medicamentos incompativeis com a doacao e '
+            'com exames de pre-natal sem alteracoes.',
+      ),
+      SecaoArtigo(
+        subtitulo: 'Exames',
+        texto:
+            'Na maioria dos casos os exames do pre-natal ja atendem a triagem. '
+            'Quando necessario, a equipe Lactare orienta sobre exames '
+            'complementares - sem custo para a doadora.',
+      ),
+      SecaoArtigo(
+        subtitulo: 'Em caso de duvida',
+        texto:
+            'A avaliacao e sempre individual. Fale com a equipe Lactare para '
+            'confirmar se o seu caso se enquadra.',
       ),
     ],
   ),
   Artigo(
-    titulo: 'Como o leite chega ate os bebes',
-    categoria: 'Processo',
+    titulo: 'Diario de uma doadora: a historia da Juliana e do Theo',
+    categoria: 'Acolhimento',
     autor: 'Equipe Lactare',
     resumo:
-        'Da coleta a distribuicao: pasteurizacao, testes de qualidade e entrega a quem precisa.',
-    minutosLeitura: 3,
+        'O relato de uma doadora sobre comecar, manter a rotina e o que muda '
+        'no caminho.',
+    minutosLeitura: 6,
+    imagem: 'assets/artigos/diario-doadora.jpg',
+    corCategoria: _corAcolhimento,
+    fundoCategoria: _fundoAcolhimento,
     secoes: [
       SecaoArtigo(
-        subtitulo: 'Pasteurizacao e qualidade',
+        subtitulo: 'O comeco',
         texto:
-            'Depois de coletado, o leite passa por pasteurizacao e testes de qualidade no banco de leite.',
+            'Juliana descobriu a doacao no proprio banco de leite onde o Theo '
+            'nasceu. O primeiro contato foi por WhatsApp e a triagem aconteceu '
+            'na mesma semana.',
       ),
       SecaoArtigo(
-        subtitulo: 'Distribuicao',
+        subtitulo: 'A rotina',
         texto:
-            'So entao ele e distribuido a bebes prematuros ou internados que precisam dele para se desenvolver.',
+            'Ordenhar virou parte do dia - sempre no mesmo horario, com o kit '
+            'ja separado. A coleta domiciliar tirou o peso do deslocamento.',
       ),
     ],
   ),
   Artigo(
-    titulo: 'Posso doar tomando medicamentos?',
-    categoria: 'Saude',
-    autor: 'Equipe Lactare',
+    titulo: 'Ferro, calcio e vitamina D: os nutrientes-chave da lactacao',
+    categoria: 'Nutricao',
+    autor: 'Dra. Mariana Costa',
     resumo:
-        'Por que voce deve informar tudo o que usa - e quem decide se libera.',
-    minutosLeitura: 2,
+        'Como manter os nutrientes essenciais em dia durante o periodo de '
+        'amamentacao.',
+    minutosLeitura: 5,
+    imagem: 'assets/artigos/nutrientes-lactacao.jpg',
+    corCategoria: _corNutricao,
+    fundoCategoria: _fundoNutricao,
     secoes: [
       SecaoArtigo(
-        subtitulo: 'Depende do medicamento',
+        subtitulo: 'Ferro',
         texto:
-            'A equipe do banco de leite avalia cada caso na triagem. Por isso e importante informar tudo o que voce esta usando, inclusive vitaminas e chas.',
+            'Carnes, feijoes e vegetais verde-escuros sao boas fontes. '
+            'Combinar com fontes de vitamina C, como frutas citricas, favorece '
+            'a absorcao.',
+      ),
+      SecaoArtigo(
+        subtitulo: 'Calcio e vitamina D',
+        texto:
+            'Leite e derivados, vegetais verde-escuros e exposicao solar '
+            'moderada ajudam a manter esses nutrientes. Suplementacao so com '
+            'indicacao de quem acompanha o seu caso.',
       ),
     ],
   ),
