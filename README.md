@@ -63,6 +63,22 @@ educativo real).
 
 ---
 
+## Perfis e logins mockados
+
+Não há autenticação real: **qualquer e-mail válido e senha com 6+ caracteres**
+entram. O perfil é escolhido no seletor da tela de login e define a área aberta:
+
+| Perfil | Como entrar | Área |
+|--------|-------------|------|
+| **Doadora** | e-mail válido + senha (6+) | Início, Doações, Pontos, Conteúdo, Perfil, EVA |
+| **Administrador** | selecionar "Admin" no login | Painel, Gestão de doações, Usuários, Perfil |
+| **Enfermeiro(a)** | selecionar "Enferm." no login | Agendamentos, Perfil |
+
+Sugestão de credenciais para o vídeo (qualquer uma funciona):
+`mariana.alves@email.com` · `123456`.
+
+---
+
 ## Prints das telas
 
 <!-- PREENCHER: substituir os placeholders por prints do APP RODANDO no
