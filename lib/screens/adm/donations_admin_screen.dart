@@ -9,8 +9,6 @@ import '../../widgets/section_card.dart';
 import '../../widgets/status_badge.dart';
 import '../donations/donation_detail_screen.dart';
 
-/// Gestao de doacoes (visao do administrador): todas as doadoras e suas
-/// doacoes. Tocar abre a linha do tempo daquela doacao.
 class DonationsAdminScreen extends StatelessWidget {
   const DonationsAdminScreen({super.key});
 
@@ -63,7 +61,8 @@ class DonationsAdminScreen extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   '${doacao.id} - iniciada em ${dataBr(doacao.dataInicio)}',
-                  style: const TextStyle(color: AppColors.muted, fontSize: 12.5),
+                  style:
+                      const TextStyle(color: AppColors.muted, fontSize: 12.5),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 Text(

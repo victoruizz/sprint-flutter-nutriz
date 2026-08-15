@@ -2,7 +2,6 @@ import '../models/bebe.dart';
 import '../models/endereco.dart';
 import '../models/nutriz.dart';
 
-/// Nutriz logada (mock). Usada na home, no perfil e para personalizar a EVA.
 final Nutriz usuariaMock = Nutriz(
   nome: 'Mariana Alves',
   email: 'mariana.alves@email.com',

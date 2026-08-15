@@ -1,4 +1,3 @@
-/// Uma secao (subtitulo + texto) do corpo de um artigo.
 class SecaoArtigo {
   final String subtitulo;
   final String texto;
@@ -6,7 +5,6 @@ class SecaoArtigo {
   const SecaoArtigo({required this.subtitulo, required this.texto});
 }
 
-/// Artigo do conteudo educativo (espelha o content-hub do produto).
 class Artigo {
   final String titulo;
   final String categoria;

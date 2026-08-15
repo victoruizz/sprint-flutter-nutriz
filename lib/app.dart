@@ -8,7 +8,6 @@ import 'screens/login/login_screen.dart';
 import 'screens/register/register_screen.dart';
 import 'screens/splash/splash_screen.dart';
 
-/// Raiz do app: define tema, titulo e as rotas nomeadas principais.
 class NutrizApp extends StatelessWidget {
   const NutrizApp({super.key});
 

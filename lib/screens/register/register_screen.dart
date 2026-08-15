@@ -4,8 +4,6 @@ import '../../core/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 
-/// Cadastro mockado em tela unica: dados pessoais, endereco, bebe (opcional) e
-/// aceite dos termos. Ao concluir, mostra um feedback de sucesso.
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -122,7 +120,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             _titulo('Bebe (opcional)'),
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              activeColor: AppColors.teal,
               title: const Text('Tenho um bebe para cadastrar'),
               value: _temBebe,
               onChanged: (v) => setState(() => _temBebe = v),
@@ -132,13 +129,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 controller: _bebe,
                 textCapitalization: TextCapitalization.words,
                 decoration: const InputDecoration(labelText: 'Nome do bebe'),
-                validator: (v) =>
-                    _temBebe ? _obrigatorio(v) : null,
+                validator: (v) => _temBebe ? _obrigatorio(v) : null,
               ),
             const SizedBox(height: AppSpacing.lg),
             CheckboxListTile(
               contentPadding: EdgeInsets.zero,
-              activeColor: AppColors.navy,
               controlAffinity: ListTileControlAffinity.leading,
               title: const Text(
                 'Li e aceito os Termos de Uso e a Politica de Privacidade.',
@@ -181,7 +176,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               color: AppColors.tealSoft,
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.check_circle, color: AppColors.teal, size: 64),
+            child:
+                const Icon(Icons.check_circle, color: AppColors.teal, size: 64),
           ),
           const SizedBox(height: AppSpacing.lg),
           Text(

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../core/theme/app_colors.dart';
 import '../models/etapa_doacao.dart';
 
-/// Pilula de status de uma etapa da doacao, com cor coerente com o produto.
 class StatusBadge extends StatelessWidget {
   final StatusEtapa status;
 
@@ -25,7 +24,7 @@ class StatusBadge extends StatelessWidget {
       StatusEtapa.pendente => (
           label: 'Pendente',
           fg: AppColors.muted,
-          bg: Color(0xFFF1F3F5),
+          bg: const Color(0xFFF1F3F5),
         ),
     };
 

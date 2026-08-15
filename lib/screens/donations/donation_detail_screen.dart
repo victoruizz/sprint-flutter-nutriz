@@ -7,8 +7,6 @@ import '../../models/doacao.dart';
 import '../../widgets/section_card.dart';
 import '../../widgets/timeline_tile.dart';
 
-/// Detalhe de UMA doacao (recebida por parametro), com a linha do tempo das
-/// etapas do fluxo Lactare.
 class DonationDetailScreen extends StatelessWidget {
   final Doacao doacao;
 
@@ -53,7 +51,8 @@ class DonationDetailScreen extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(
                   '${doacao.etapasConcluidas} de ${etapas.length} etapas concluidas',
-                  style: const TextStyle(color: AppColors.muted, fontSize: 12.5),
+                  style:
+                      const TextStyle(color: AppColors.muted, fontSize: 12.5),
                 ),
               ],
             ),

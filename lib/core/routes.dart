@@ -1,5 +1,3 @@
-/// Nomes de rota centralizados. As telas de detalhe (doacao, artigo, ponto)
-/// sao abertas com Navigator.push passando o objeto por parametro.
 class AppRoutes {
   AppRoutes._();
 

@@ -9,14 +9,13 @@ import '../../models/perfil.dart';
 import '../../widgets/info_row.dart';
 import '../../widgets/section_card.dart';
 
-/// Perfil do usuario logado. Adapta o conteudo ao papel (doadora, admin ou
-/// enfermeiro). Para a nutriz, mostra bebe e endereco.
 class ProfileScreen extends StatelessWidget {
   final PerfilUsuario perfil;
 
   const ProfileScreen({super.key, this.perfil = PerfilUsuario.nutriz});
 
-  ({String nome, String subtitulo, String email}) get _dados => switch (perfil) {
+  ({String nome, String subtitulo, String email}) get _dados =>
+      switch (perfil) {
         PerfilUsuario.nutriz => (
             nome: usuariaMock.nome,
             subtitulo: 'Doadora',

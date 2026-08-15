@@ -8,7 +8,6 @@ import '../../widgets/agendamento_status_chip.dart';
 import '../../widgets/section_card.dart';
 import 'appointment_detail_screen.dart';
 
-/// Lista de agendamentos do enfermeiro. Tocar abre o detalhe daquele.
 class AppointmentsScreen extends StatelessWidget {
   const AppointmentsScreen({super.key});
 

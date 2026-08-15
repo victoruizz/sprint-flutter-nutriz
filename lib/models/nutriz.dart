@@ -1,7 +1,6 @@
 import 'bebe.dart';
 import 'endereco.dart';
 
-/// Nutriz doadora (espelha a entidade user, tipo 'common', do dominio real).
 class Nutriz {
   final String nome;
   final String email;

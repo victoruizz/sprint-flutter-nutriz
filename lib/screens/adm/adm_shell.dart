@@ -6,7 +6,6 @@ import 'dashboard_screen.dart';
 import 'donations_admin_screen.dart';
 import 'users_screen.dart';
 
-/// Casca da area do administrador: painel, gestao de doacoes, usuarios e perfil.
 class AdmShell extends StatefulWidget {
   const AdmShell({super.key});
 

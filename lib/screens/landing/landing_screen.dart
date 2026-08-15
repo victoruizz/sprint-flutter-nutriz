@@ -5,8 +5,6 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../widgets/nutriz_logo.dart';
 
-/// Landing page publica do produto: apresenta a proposta, como funciona e leva
-/// ao login/cadastro. Espelha a landing do web-nutriz.
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});
 
@@ -18,11 +16,11 @@ class LandingScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _hero(context),
-            Padding(
-              padding: const EdgeInsets.all(AppSpacing.lg),
+            const Padding(
+              padding: EdgeInsets.all(AppSpacing.lg),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'COMO FUNCIONA',
                     style: TextStyle(
@@ -45,7 +43,8 @@ class LandingScreen extends StatelessWidget {
                   _Passo(
                     numero: '1',
                     titulo: 'Cadastro e triagem',
-                    texto: 'Voce se cadastra e a equipe Lactare faz a triagem inicial.',
+                    texto:
+                        'Voce se cadastra e a equipe Lactare faz a triagem inicial.',
                   ),
                   _Passo(
                     numero: '2',
@@ -60,7 +59,8 @@ class LandingScreen extends StatelessWidget {
                   _Passo(
                     numero: '4',
                     titulo: 'Distribuicao',
-                    texto: 'Apos a pasteurizacao, o leite chega a bebes que precisam.',
+                    texto:
+                        'Apos a pasteurizacao, o leite chega a bebes que precisam.',
                   ),
                 ],
               ),
@@ -160,7 +160,8 @@ class LandingScreen extends StatelessWidget {
               const Text(
                 'A Nutriz conecta nutrizes doadoras ao banco de leite humano da '
                 'Lactare - do cadastro a coleta na sua casa.',
-                style: TextStyle(color: Colors.white70, fontSize: 15, height: 1.4),
+                style:
+                    TextStyle(color: Colors.white70, fontSize: 15, height: 1.4),
               ),
               const SizedBox(height: AppSpacing.lg),
               ElevatedButton(
@@ -265,7 +266,8 @@ class _Stat extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 2),
-        Text(label, style: const TextStyle(color: AppColors.muted, fontSize: 13)),
+        Text(label,
+            style: const TextStyle(color: AppColors.muted, fontSize: 13)),
       ],
     );
   }

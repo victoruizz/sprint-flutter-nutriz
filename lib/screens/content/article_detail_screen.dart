@@ -4,7 +4,6 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../models/artigo.dart';
 
-/// Detalhe de UM artigo (recebido por parametro), com suas secoes.
 class ArticleDetailScreen extends StatelessWidget {
   final Artigo artigo;
 
@@ -45,7 +44,8 @@ class ArticleDetailScreen extends StatelessWidget {
           const SizedBox(height: AppSpacing.sm),
           Row(
             children: [
-              const Icon(Icons.person_outline, size: 16, color: AppColors.muted),
+              const Icon(Icons.person_outline,
+                  size: 16, color: AppColors.muted),
               const SizedBox(width: 4),
               Text(
                 artigo.autor,

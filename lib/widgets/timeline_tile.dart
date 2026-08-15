@@ -5,7 +5,6 @@ import '../core/theme/app_colors.dart';
 import '../core/theme/app_spacing.dart';
 import '../models/etapa_doacao.dart';
 
-/// Um item da linha do tempo da doacao: marcador + conector + conteudo.
 class TimelineTile extends StatelessWidget {
   final EtapaDoacao etapa;
   final bool ultima;

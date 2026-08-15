@@ -1,4 +1,3 @@
-/// Endereco da nutriz (espelha address do dominio real).
 class Endereco {
   final String cep;
   final String rua;

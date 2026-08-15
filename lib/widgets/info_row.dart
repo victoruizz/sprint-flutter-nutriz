@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../core/theme/app_colors.dart';
 
-/// Linha de informacao (icone + rotulo + valor), usada no perfil e detalhes.
 class InfoRow extends StatelessWidget {
   final IconData icone;
   final String label;
@@ -30,7 +29,8 @@ class InfoRow extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: const TextStyle(color: AppColors.muted, fontSize: 12.5),
+                  style:
+                      const TextStyle(color: AppColors.muted, fontSize: 12.5),
                 ),
                 const SizedBox(height: 2),
                 Text(

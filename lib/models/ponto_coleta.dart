@@ -1,4 +1,3 @@
-/// Ponto de coleta / banco de leite (espelha donation_point).
 class PontoColeta {
   final String nome;
   final String endereco;
@@ -20,5 +19,6 @@ class PontoColeta {
     required this.horario,
   });
 
-  String get tipoColeta => coletaDomiciliar ? 'Coleta domiciliar' : 'Coleta no ponto';
+  String get tipoColeta =>
+      coletaDomiciliar ? 'Coleta domiciliar' : 'Coleta no ponto';
 }

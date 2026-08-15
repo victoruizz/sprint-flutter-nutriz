@@ -5,8 +5,7 @@ const String _dTriagem =
     'Cadastro realizado e triagem inicial concluida pela equipe Lactare.';
 const String _dExames =
     'Exames do pre-natal avaliados pelo banco de leite. Voce esta apta a doar.';
-const String _dKit =
-    'Kit de ordenha esterilizado enviado para o seu endereco.';
+const String _dKit = 'Kit de ordenha esterilizado enviado para o seu endereco.';
 const String _dColeta =
     'Coleta domiciliar do leite ordenhado e congelado. Um agente passa na sua casa.';
 const String _dAnalise =
@@ -14,8 +13,6 @@ const String _dAnalise =
 const String _dDistribuicao =
     'Leite pasteurizado distribuido a bebes prematuros e internados.';
 
-/// Doacoes acompanhadas pela nutriz (mock). A primeira esta em andamento; a
-/// segunda concluida; a terceira no inicio do fluxo.
 final List<Doacao> doacoesMock = [
   Doacao(
     id: 'DOA-2026-014',
@@ -46,12 +43,12 @@ final List<Doacao> doacoesMock = [
         status: StatusEtapa.emAndamento,
         data: DateTime(2026, 8, 14),
       ),
-      EtapaDoacao(
+      const EtapaDoacao(
         titulo: 'Analise Laboratorial',
         descricao: _dAnalise,
         status: StatusEtapa.pendente,
       ),
-      EtapaDoacao(
+      const EtapaDoacao(
         titulo: 'Processamento e Distribuicao',
         descricao: _dDistribuicao,
         status: StatusEtapa.pendente,
@@ -112,27 +109,27 @@ final List<Doacao> doacoesMock = [
         status: StatusEtapa.emAndamento,
         data: DateTime(2026, 8, 13),
       ),
-      EtapaDoacao(
+      const EtapaDoacao(
         titulo: 'Exames',
         descricao: _dExames,
         status: StatusEtapa.pendente,
       ),
-      EtapaDoacao(
+      const EtapaDoacao(
         titulo: 'Envio do Kit de Ordenha',
         descricao: _dKit,
         status: StatusEtapa.pendente,
       ),
-      EtapaDoacao(
+      const EtapaDoacao(
         titulo: 'Coleta',
         descricao: _dColeta,
         status: StatusEtapa.pendente,
       ),
-      EtapaDoacao(
+      const EtapaDoacao(
         titulo: 'Analise Laboratorial',
         descricao: _dAnalise,
         status: StatusEtapa.pendente,
       ),
-      EtapaDoacao(
+      const EtapaDoacao(
         titulo: 'Processamento e Distribuicao',
         descricao: _dDistribuicao,
         status: StatusEtapa.pendente,

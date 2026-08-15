@@ -1,6 +1,5 @@
 import '../models/usuario_sistema.dart';
 
-/// Usuarios do sistema (mock) para a gestao de usuarios do administrador.
 const List<UsuarioSistema> usuariosMock = [
   UsuarioSistema(
     nome: 'Mariana Alves',

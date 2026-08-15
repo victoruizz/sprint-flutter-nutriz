@@ -1,7 +1,5 @@
-/// Situacao de um agendamento (visita/acao) do enfermeiro.
 enum StatusAgendamento { aguardando, realizada, naoRealizada }
 
-/// Agendamento atendido pelo enfermeiro (espelha job/agendamento do produto).
 class Agendamento {
   final String doadora;
   final String endereco;

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../core/theme/app_colors.dart';
 
-/// Logo do app: gota de leite em gradiente + nome. Desenhada em widget (sem
-/// asset de imagem) para nunca quebrar no build do avaliador.
 class NutrizLogo extends StatelessWidget {
   final double size;
   final bool light;

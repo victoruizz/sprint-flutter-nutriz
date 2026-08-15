@@ -6,15 +6,13 @@ import '../../data/mock_dashboard.dart';
 import '../../data/mock_sessao.dart';
 import '../../widgets/section_card.dart';
 
-/// Painel do administrador: indicadores e distribuicao das doacoes por etapa.
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final maxEtapa = doacoesPorEtapaMock
-        .map((e) => e.total)
-        .reduce((a, b) => a > b ? a : b);
+    final maxEtapa =
+        doacoesPorEtapaMock.map((e) => e.total).reduce((a, b) => a > b ? a : b);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Painel')),
@@ -109,7 +107,6 @@ class DashboardScreen extends StatelessWidget {
   }
 }
 
-/// Cartao de indicador do painel.
 class _MetricCard extends StatelessWidget {
   final MetricaDashboard metrica;
 
@@ -141,7 +138,8 @@ class _MetricCard extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             metrica.subtitulo,
-            style: const TextStyle(color: AppColors.muted, fontSize: 11.5, height: 1.3),
+            style: const TextStyle(
+                color: AppColors.muted, fontSize: 11.5, height: 1.3),
           ),
         ],
       ),

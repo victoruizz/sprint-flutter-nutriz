@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
-/// Tema central do app. Concentra cores, tipografia e estilos de componentes
-/// para manter consistencia visual em todas as telas (criterio de UI).
 class AppTheme {
   AppTheme._();
 

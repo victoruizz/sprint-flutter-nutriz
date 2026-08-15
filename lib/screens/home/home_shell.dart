@@ -8,8 +8,6 @@ import '../points/points_screen.dart';
 import '../profile/profile_screen.dart';
 import 'home_screen.dart';
 
-/// Casca principal do app depois do login: barra de navegacao inferior com as
-/// 5 areas e um botao flutuante para a EVA.
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
 

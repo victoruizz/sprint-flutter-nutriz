@@ -9,7 +9,6 @@ import '../../widgets/section_card.dart';
 import '../../widgets/status_badge.dart';
 import 'donation_detail_screen.dart';
 
-/// Lista das doacoes da nutriz. Tocar num card abre o detalhe daquela doacao.
 class DonationsScreen extends StatelessWidget {
   const DonationsScreen({super.key});
 

@@ -1,7 +1,5 @@
-/// Tipo de conta na visao administrativa.
 enum TipoUsuario { doadora, enfermeiro, administrador }
 
-/// Usuario do sistema exibido na gestao de usuarios (visao do administrador).
 class UsuarioSistema {
   final String nome;
   final String email;

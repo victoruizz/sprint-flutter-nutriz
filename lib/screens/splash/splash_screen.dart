@@ -5,7 +5,6 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../widgets/nutriz_logo.dart';
 
-/// Tela de apresentacao com a identidade do produto e o botao "Comecar".
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
@@ -37,7 +36,8 @@ class SplashScreen extends StatelessWidget {
                 const Text(
                   'Conectamos nutrizes doadoras ao banco de leite humano da Lactare.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white70, fontSize: 14, height: 1.4),
+                  style: TextStyle(
+                      color: Colors.white70, fontSize: 14, height: 1.4),
                 ),
                 const Spacer(),
                 ElevatedButton(
@@ -45,8 +45,8 @@ class SplashScreen extends StatelessWidget {
                     backgroundColor: AppColors.white,
                     foregroundColor: AppColors.navy,
                   ),
-                  onPressed: () =>
-                      Navigator.pushReplacementNamed(context, AppRoutes.landing),
+                  onPressed: () => Navigator.pushReplacementNamed(
+                      context, AppRoutes.landing),
                   child: const Text('Comecar'),
                 ),
                 const SizedBox(height: AppSpacing.md),

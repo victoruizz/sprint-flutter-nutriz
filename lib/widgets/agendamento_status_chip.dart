@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../core/theme/app_colors.dart';
 import '../models/agendamento.dart';
 
-/// Pilula de status de um agendamento do enfermeiro.
 class AgendamentoStatusChip extends StatelessWidget {
   final StatusAgendamento status;
 
@@ -30,10 +29,12 @@ class AgendamentoStatusChip extends StatelessWidget {
     };
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(999)),
+      decoration:
+          BoxDecoration(color: bg, borderRadius: BorderRadius.circular(999)),
       child: Text(
         label,
-        style: TextStyle(color: fg, fontWeight: FontWeight.w700, fontSize: 11.5),
+        style:
+            TextStyle(color: fg, fontWeight: FontWeight.w700, fontSize: 11.5),
       ),
     );
   }

@@ -8,7 +8,6 @@ import '../../widgets/agendamento_status_chip.dart';
 import '../../widgets/info_row.dart';
 import '../../widgets/section_card.dart';
 
-/// Detalhe de UM agendamento (recebido por parametro), na visao do enfermeiro.
 class AppointmentDetailScreen extends StatelessWidget {
   final Agendamento agendamento;
 

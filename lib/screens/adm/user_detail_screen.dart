@@ -6,7 +6,6 @@ import '../../models/usuario_sistema.dart';
 import '../../widgets/info_row.dart';
 import '../../widgets/section_card.dart';
 
-/// Detalhe de UM usuario (recebido por parametro), na visao do administrador.
 class UserDetailScreen extends StatelessWidget {
   final UsuarioSistema usuario;
 
@@ -112,7 +111,8 @@ class UserDetailScreen extends StatelessWidget {
               ),
             ),
             icon: Icon(usuario.ativo ? Icons.block : Icons.check),
-            label: Text(usuario.ativo ? 'Desativar usuario' : 'Reativar usuario'),
+            label:
+                Text(usuario.ativo ? 'Desativar usuario' : 'Reativar usuario'),
           ),
         ],
       ),

@@ -1,6 +1,5 @@
 import '../models/ponto_coleta.dart';
 
-/// Pontos de coleta / bancos de leite (mock) com bairros reais de Sao Paulo.
 const List<PontoColeta> pontosMock = [
   PontoColeta(
     nome: 'Lactare - Banco de Leite Humano',

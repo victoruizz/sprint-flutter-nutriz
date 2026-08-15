@@ -1,7 +1,5 @@
 import 'etapa_doacao.dart';
 
-/// Uma doacao acompanhada pela nutriz, com sua linha do tempo de etapas
-/// (espelha donation + donation_step_timeline).
 class Doacao {
   final String id;
   final String titulo;
@@ -22,11 +20,9 @@ class Doacao {
 
   bool get concluida => etapasConcluidas == etapas.length;
 
-  /// Rotulo da etapa atual (a que esta em andamento, ou a ultima concluida).
   String get statusAtual {
-    final emAndamento = etapas
-        .where((e) => e.status == StatusEtapa.emAndamento)
-        .toList();
+    final emAndamento =
+        etapas.where((e) => e.status == StatusEtapa.emAndamento).toList();
     if (emAndamento.isNotEmpty) return emAndamento.first.titulo;
     if (concluida) return 'Concluida';
     return etapas.first.titulo;

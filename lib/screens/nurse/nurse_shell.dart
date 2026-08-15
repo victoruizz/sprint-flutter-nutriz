@@ -4,7 +4,6 @@ import '../../models/perfil.dart';
 import '../profile/profile_screen.dart';
 import 'appointments_screen.dart';
 
-/// Casca da area do enfermeiro(a): agendamentos e perfil.
 class NurseShell extends StatefulWidget {
   const NurseShell({super.key});
 

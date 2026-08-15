@@ -1,6 +1,5 @@
 import '../models/agendamento.dart';
 
-/// Agendamentos atendidos pelo enfermeiro (mock).
 final List<Agendamento> agendamentosMock = [
   Agendamento(
     doadora: 'Mariana Alves',

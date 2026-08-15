@@ -9,8 +9,6 @@ import '../adm/adm_shell.dart';
 import '../home/home_shell.dart';
 import '../nurse/nurse_shell.dart';
 
-/// Login mockado: valida o formato dos campos e permite escolher o perfil
-/// (doadora, administrador ou enfermeiro) para explorar cada area do app.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 

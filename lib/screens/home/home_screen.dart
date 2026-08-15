@@ -8,7 +8,6 @@ import '../../models/doacao.dart';
 import '../../widgets/section_card.dart';
 import '../donations/donation_detail_screen.dart';
 
-/// Aba inicial: saudacao personalizada, doacao em andamento, atalhos e a EVA.
 class HomeScreen extends StatelessWidget {
   final void Function(int aba) onIrParaAba;
   final VoidCallback onAbrirEva;
@@ -75,7 +74,8 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   'Etapa atual: ${ativa.statusAtual}',
-                  style: const TextStyle(color: AppColors.navy, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                      color: AppColors.navy, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 ClipRRect(
@@ -90,7 +90,8 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(
                   '${ativa.etapasConcluidas} de ${ativa.etapas.length} etapas concluidas',
-                  style: const TextStyle(color: AppColors.muted, fontSize: 12.5),
+                  style:
+                      const TextStyle(color: AppColors.muted, fontSize: 12.5),
                 ),
               ],
             ),
@@ -137,7 +138,8 @@ class HomeScreen extends StatelessWidget {
                     gradient: AppColors.evaGradient,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.chat_bubble_outline, color: AppColors.white),
+                  child: const Icon(Icons.chat_bubble_outline,
+                      color: AppColors.white),
                 ),
                 const SizedBox(width: AppSpacing.md),
                 const Expanded(
@@ -146,7 +148,10 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Text(
                         'Converse com a EVA',
-                        style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: AppColors.ink),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 15,
+                            color: AppColors.ink),
                       ),
                       SizedBox(height: 2),
                       Text(
@@ -199,7 +204,6 @@ class HomeScreen extends StatelessWidget {
       );
 }
 
-/// Cartao de atalho quadrado usado na home.
 class _Atalho extends StatelessWidget {
   final IconData icone;
   final Color cor;

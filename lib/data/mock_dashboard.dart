@@ -1,4 +1,3 @@
-/// Um indicador do painel do administrador.
 class MetricaDashboard {
   final String titulo;
   final String valor;
@@ -11,7 +10,6 @@ class MetricaDashboard {
   });
 }
 
-/// Contagem de doacoes em uma etapa (para o grafico simples do dashboard).
 class EtapaContagem {
   final String etapa;
   final int total;
@@ -19,7 +17,6 @@ class EtapaContagem {
   const EtapaContagem({required this.etapa, required this.total});
 }
 
-/// Indicadores do painel (mock), com os mesmos titulos do dashboard real.
 const List<MetricaDashboard> metricasMock = [
   MetricaDashboard(
     titulo: 'Litros Captados no Mes',
@@ -53,7 +50,6 @@ const List<MetricaDashboard> metricasMock = [
   ),
 ];
 
-/// Distribuicao das doacoes ativas por etapa (mock).
 const List<EtapaContagem> doacoesPorEtapaMock = [
   EtapaContagem(etapa: 'Cadastro e Triagem', total: 9),
   EtapaContagem(etapa: 'Exames', total: 6),

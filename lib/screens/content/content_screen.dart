@@ -6,7 +6,6 @@ import '../../data/mock_artigos.dart';
 import '../../widgets/section_card.dart';
 import 'article_detail_screen.dart';
 
-/// Lista de artigos do conteudo educativo. Tocar abre aquele artigo.
 class ContentScreen extends StatelessWidget {
   const ContentScreen({super.key});
 
@@ -33,7 +32,8 @@ class ContentScreen extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
                         color: AppColors.pinkSoft,
                         borderRadius: BorderRadius.circular(999),
@@ -50,7 +50,8 @@ class ContentScreen extends StatelessWidget {
                     const SizedBox(width: AppSpacing.sm),
                     Text(
                       '${artigo.minutosLeitura} min de leitura',
-                      style: const TextStyle(color: AppColors.muted, fontSize: 12),
+                      style:
+                          const TextStyle(color: AppColors.muted, fontSize: 12),
                     ),
                   ],
                 ),

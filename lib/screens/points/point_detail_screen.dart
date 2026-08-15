@@ -6,7 +6,6 @@ import '../../models/ponto_coleta.dart';
 import '../../widgets/info_row.dart';
 import '../../widgets/section_card.dart';
 
-/// Detalhe de UM ponto de coleta (recebido por parametro).
 class PointDetailScreen extends StatelessWidget {
   final PontoColeta ponto;
 
@@ -28,7 +27,6 @@ class PointDetailScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(AppSpacing.md),
         children: [
-          // Placeholder de mapa (sem dependencia externa).
           Container(
             height: 140,
             decoration: BoxDecoration(
@@ -75,7 +73,9 @@ class PointDetailScreen extends StatelessWidget {
                   valor: ponto.tipoColeta,
                 ),
                 InfoRow(
-                  icone: ponto.aberto ? Icons.check_circle_outline : Icons.cancel_outlined,
+                  icone: ponto.aberto
+                      ? Icons.check_circle_outline
+                      : Icons.cancel_outlined,
                   label: 'Situacao',
                   valor: ponto.aberto ? 'Aberto agora' : 'Fechado no momento',
                 ),

@@ -1,7 +1,5 @@
-/// Situacao de cada etapa da doacao.
 enum StatusEtapa { concluida, emAndamento, pendente }
 
-/// Etapa do fluxo de doacao Lactare (espelha donation_step).
 class EtapaDoacao {
   final String titulo;
   final String descricao;

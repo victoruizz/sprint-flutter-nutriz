@@ -1,7 +1,5 @@
 import '../models/artigo.dart';
 
-/// Artigos do conteudo educativo (mock), com copy real do produto Nutriz
-/// (dicas e perguntas frequentes do content-hub).
 const List<Artigo> artigosMock = [
   Artigo(
     titulo: 'Doar leite diminui o leite do meu bebe?',

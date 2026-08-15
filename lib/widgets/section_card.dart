@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../core/theme/app_colors.dart';
 import '../core/theme/app_spacing.dart';
 
-/// Cartao branco com borda, base visual reutilizada em todo o app.
 class SectionCard extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry padding;

@@ -1,4 +1,3 @@
-/// Espacamentos e raios consistentes em todo o app (multiplos de 4).
 class AppSpacing {
   AppSpacing._();
 

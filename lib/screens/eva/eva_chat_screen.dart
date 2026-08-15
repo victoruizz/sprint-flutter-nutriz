@@ -7,8 +7,6 @@ import '../../models/mensagem_eva.dart';
 import '../../widgets/chat_bubble.dart';
 import '../../widgets/suggestion_chip.dart';
 
-/// Chat mockado com a EVA: nada chama IA real. As respostas sao mapeadas por
-/// palavra-chave e o "digitando" e simulado com Future.delayed.
 class EvaChatScreen extends StatefulWidget {
   const EvaChatScreen({super.key});
 
@@ -52,7 +50,6 @@ class _EvaChatScreenState extends State<EvaChatScreen> {
       _digitando = true;
     });
     _rolarParaFim();
-    // Simula o tempo de "pensar" da EVA.
     await Future.delayed(const Duration(milliseconds: 1100));
     if (!mounted) return;
     setState(() {
@@ -73,14 +70,15 @@ class _EvaChatScreenState extends State<EvaChatScreen> {
             width: double.infinity,
             color: AppColors.pinkSoft,
             padding: const EdgeInsets.all(AppSpacing.sm),
-            child: Row(
+            child: const Row(
               children: [
-                const Icon(Icons.info_outline, size: 18, color: AppColors.pink),
-                const SizedBox(width: 8),
+                Icon(Icons.info_outline, size: 18, color: AppColors.pink),
+                SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     evaAvisoMedico,
-                    style: const TextStyle(fontSize: 12, color: AppColors.ink, height: 1.3),
+                    style: TextStyle(
+                        fontSize: 12, color: AppColors.ink, height: 1.3),
                   ),
                 ),
               ],
@@ -125,7 +123,8 @@ class _EvaChatScreenState extends State<EvaChatScreen> {
             SizedBox(
               width: 16,
               height: 16,
-              child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.teal),
+              child: CircularProgressIndicator(
+                  strokeWidth: 2, color: AppColors.teal),
             ),
             SizedBox(width: 8),
             Text(

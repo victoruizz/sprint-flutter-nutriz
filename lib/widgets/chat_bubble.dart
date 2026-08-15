@@ -4,7 +4,6 @@ import '../core/theme/app_colors.dart';
 import '../core/theme/app_spacing.dart';
 import '../models/mensagem_eva.dart';
 
-/// Bolha de conversa da EVA (esquerda, clara) ou da nutriz (direita, navy).
 class ChatBubble extends StatelessWidget {
   final MensagemEva mensagem;
 

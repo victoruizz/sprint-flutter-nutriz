@@ -6,7 +6,6 @@ import '../../data/mock_pontos.dart';
 import '../../widgets/section_card.dart';
 import 'point_detail_screen.dart';
 
-/// Lista de pontos de coleta. Tocar num card abre o detalhe daquele ponto.
 class PointsScreen extends StatelessWidget {
   const PointsScreen({super.key});
 
@@ -49,24 +48,33 @@ class PointsScreen extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   '${ponto.endereco} - ${ponto.bairro}, ${ponto.cidade}',
-                  style: const TextStyle(color: AppColors.muted, fontSize: 13, height: 1.3),
+                  style: const TextStyle(
+                      color: AppColors.muted, fontSize: 13, height: 1.3),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 Row(
                   children: [
-                    const Icon(Icons.near_me_outlined, size: 16, color: AppColors.blue),
+                    const Icon(Icons.near_me_outlined,
+                        size: 16, color: AppColors.blue),
                     const SizedBox(width: 4),
                     Text(
                       '${ponto.distanciaKm.toStringAsFixed(1)} km',
-                      style: const TextStyle(color: AppColors.ink, fontSize: 13, fontWeight: FontWeight.w600),
+                      style: const TextStyle(
+                          color: AppColors.ink,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600),
                     ),
                     if (ponto.coletaDomiciliar) ...[
                       const SizedBox(width: AppSpacing.md),
-                      const Icon(Icons.home_outlined, size: 16, color: AppColors.teal),
+                      const Icon(Icons.home_outlined,
+                          size: 16, color: AppColors.teal),
                       const SizedBox(width: 4),
                       const Text(
                         'Coleta domiciliar',
-                        style: TextStyle(color: AppColors.teal, fontSize: 13, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            color: AppColors.teal,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600),
                       ),
                     ],
                   ],
@@ -80,7 +88,6 @@ class PointsScreen extends StatelessWidget {
   }
 }
 
-/// Etiqueta de aberto/fechado do ponto de coleta.
 class _StatusPonto extends StatelessWidget {
   final bool aberto;
 
@@ -92,7 +99,8 @@ class _StatusPonto extends StatelessWidget {
     final fundo = aberto ? AppColors.tealSoft : const Color(0xFFF1F3F5);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: fundo, borderRadius: BorderRadius.circular(999)),
+      decoration:
+          BoxDecoration(color: fundo, borderRadius: BorderRadius.circular(999)),
       child: Text(
         aberto ? 'Aberto' : 'Fechado',
         style: TextStyle(color: cor, fontWeight: FontWeight.w700, fontSize: 12),

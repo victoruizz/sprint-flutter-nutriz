@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../core/theme/app_colors.dart';
 
-/// Chip de sugestao de pergunta (usado na EVA e na home).
 class SuggestionChip extends StatelessWidget {
   final String texto;
   final VoidCallback onTap;
