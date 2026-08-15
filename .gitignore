@@ -17,3 +17,5 @@ build/
 
 # Sistema
 .DS_Store
+
+flutter_*.log

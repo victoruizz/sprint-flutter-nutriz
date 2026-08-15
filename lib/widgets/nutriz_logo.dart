@@ -1,41 +1,26 @@
 import 'package:flutter/material.dart';
 
-import '../core/theme/app_colors.dart';
-
+/// Wordmark oficial do Nutriz, mesma imagem usada no web-nutriz
+/// (assets/images/nutriz-wordmark-{white,blue}.png).
+///
+/// [altura] e a altura do wordmark em pixels logicos - a largura acompanha
+/// proporcionalmente. Use [light] em fundos escuros (navy) e false em fundo
+/// claro.
 class NutrizLogo extends StatelessWidget {
-  final double size;
+  final double altura;
   final bool light;
 
-  const NutrizLogo({super.key, this.size = 40, this.light = false});
+  const NutrizLogo({super.key, this.altura = 28, this.light = true});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: size,
-          height: size,
-          decoration: const BoxDecoration(
-            gradient: AppColors.evaGradient,
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            Icons.water_drop,
-            color: AppColors.white,
-            size: size * 0.55,
-          ),
-        ),
-        SizedBox(width: size * 0.3),
-        Text(
-          'Nutriz',
-          style: TextStyle(
-            fontSize: size * 0.62,
-            fontWeight: FontWeight.w800,
-            color: light ? AppColors.white : AppColors.navy,
-          ),
-        ),
-      ],
+    return Image.asset(
+      light
+          ? 'assets/images/nutriz-wordmark-white.png'
+          : 'assets/images/nutriz-wordmark-blue.png',
+      height: altura,
+      fit: BoxFit.contain,
+      semanticLabel: 'Nutriz',
     );
   }
 }
