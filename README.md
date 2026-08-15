@@ -99,10 +99,6 @@ Sugestão de credenciais para o vídeo (qualquer uma funciona):
 | Painel do administrador | <!-- PREENCHER --> |
 | Agendamentos (enfermeiro) | <!-- PREENCHER --> |
 
-**Como capturar:** com o app aberto no emulador, use o botão de câmera na barra
-lateral do emulador ou rode `flutter screenshot`, e salve os arquivos na pasta
-de prints.
-
 ---
 
 ## Como executar
@@ -154,29 +150,6 @@ lib/
 - **Flutter puro**, Material Design, sem pacotes de terceiros.
 - Gerenciamento de estado simples (`setState`).
 - Dados mockados em `lib/data/`, nunca embutidos nas telas.
-
----
-
-## Roteiro de gravação do vídeo
-
-Ordem sugerida para evidenciar todos os fluxos (grave com o app rodando no
-emulador):
-
-1. Abrir o app → **Splash** → "Começar" → **Landing** (rolar mostrando "como
-   funciona" e impacto).
-2. **Login** → escolher **Doadora** → preencher e-mail/senha → "Entrar" (mostrar
-   o SnackBar de sucesso).
-3. **Início** → tocar na doação em andamento → **Detalhe** (mostrar a timeline).
-4. Voltar → aba **Pontos** → abrir um ponto → "Solicitar coleta" (SnackBar).
-5. Aba **Conteúdo** → abrir um artigo (passagem de parâmetro).
-6. Botão flutuante da **EVA** → tocar uma sugestão → mostrar "digitando" e a
-   resposta → escrever uma pergunta.
-7. Aba **Perfil** → mostrar dados → "Sair".
-8. **Login** de novo → **Admin** → **Painel** (indicadores) → **Gestão de
-   doações** → **Usuários** → abrir um usuário.
-9. **Sair** → **Login** → **Enfermeiro** → **Agendamentos** → abrir um → "Preencher
-   relatório" (SnackBar).
-10. (Opcional) Login como Doadora → **Cadastro** → preencher → tela de sucesso.
 
 ---
 
