@@ -160,6 +160,27 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(height: AppSpacing.lg),
+          _tituloSecao('Dica de armazenamento'),
+          const SectionCard(
+            child: Row(
+              children: [
+                Icon(Icons.ac_unit, color: AppColors.teal),
+                SizedBox(width: AppSpacing.md),
+                Expanded(
+                  child: Text(
+                    'Congele o leite logo apos a ordenha e anote a data e a hora '
+                    'na tampa - o leite cru congelado vale ate 15 dias.',
+                    style: TextStyle(
+                      color: AppColors.ink,
+                      fontSize: 13.5,
+                      height: 1.35,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
