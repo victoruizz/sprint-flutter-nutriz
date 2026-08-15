@@ -2,273 +2,312 @@ import 'package:flutter/material.dart';
 
 import '../../core/routes.dart';
 import '../../core/theme/app_colors.dart';
-import '../../core/theme/app_spacing.dart';
+import '../../data/mock_landing.dart';
 import '../../widgets/nutriz_logo.dart';
+import '../eva/eva_chat_screen.dart';
+import 'components/landing_articles.dart';
+import 'components/landing_cta.dart';
+import 'components/landing_eva.dart';
+import 'components/landing_footer.dart';
+import 'components/landing_hero.dart';
+import 'components/landing_how_it_works.dart';
+import 'components/landing_points.dart';
+import 'components/landing_stats.dart';
+import 'components/landing_testimonials.dart';
 
-class LandingScreen extends StatelessWidget {
+/// Landing page publica do Nutriz, na mesma ordem de secoes do web-nutriz
+/// (pages/public/landing-page/index.tsx): hero, metricas, como funciona,
+/// pontos de coleta, EVA, artigos, depoimentos, CTA final e rodape.
+class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});
+
+  @override
+  State<LandingScreen> createState() => _LandingScreenState();
+}
+
+class _LandingScreenState extends State<LandingScreen> {
+  final _scrollController = ScrollController();
+
+  // Ancoras usadas pelo menu e pelo rodape para rolar ate cada secao.
+  final _chaves = <String, GlobalKey>{
+    'Como funciona': GlobalKey(),
+    'Pontos de coleta': GlobalKey(),
+    'A EVA': GlobalKey(),
+    'Artigos': GlobalKey(),
+    'Depoimentos': GlobalKey(),
+  };
+
+  bool _rolou = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      final rolou = _scrollController.offset > 16;
+      if (rolou != _rolou) setState(() => _rolou = rolou);
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _irParaSecao(String secao) {
+    final chave = _chaves[secao];
+    final contexto = chave?.currentContext;
+    if (contexto == null) return;
+
+    Scrollable.ensureVisible(
+      contexto,
+      duration: const Duration(milliseconds: 450),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void _abrirEva([String? sugestao]) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => EvaChatScreen(perguntaInicial: sugestao),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _hero(context),
-            const Padding(
-              padding: EdgeInsets.all(AppSpacing.lg),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'COMO FUNCIONA',
-                    style: TextStyle(
-                      color: AppColors.blue,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 1.2,
-                      fontSize: 13,
-                    ),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    'Doar e simples e seguro',
-                    style: TextStyle(
-                      color: AppColors.ink,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  SizedBox(height: AppSpacing.md),
-                  _Passo(
-                    numero: '1',
-                    titulo: 'Cadastro e triagem',
-                    texto:
-                        'Voce se cadastra e a equipe Lactare faz a triagem inicial.',
-                  ),
-                  _Passo(
-                    numero: '2',
-                    titulo: 'Kit de ordenha',
-                    texto: 'Enviamos um kit esterilizado para a sua casa.',
-                  ),
-                  _Passo(
-                    numero: '3',
-                    titulo: 'Coleta domiciliar',
-                    texto: 'Buscamos o leite congelado no seu endereco.',
-                  ),
-                  _Passo(
-                    numero: '4',
-                    titulo: 'Distribuicao',
-                    texto:
-                        'Apos a pasteurizacao, o leite chega a bebes que precisam.',
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              color: AppColors.blueSoft,
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _Stat(valor: '2 mil+', label: 'doadoras'),
-                  _Stat(valor: '128 L', label: 'no mes'),
-                  _Stat(valor: '50+', label: 'bebes/mes'),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(AppSpacing.lg),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Center(
-                    child: Text(
-                      'Pronta para ajudar?',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w800,
-                        color: AppColors.ink,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.md),
-                  ElevatedButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, AppRoutes.register),
-                    child: const Text('Criar minha conta'),
-                  ),
-                  TextButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, AppRoutes.login),
-                    child: const Text('Ja tenho conta'),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+      backgroundColor: AppColors.white,
+      endDrawer: _MenuLanding(
+        onIrParaSecao: _irParaSecao,
+        secoes: secoesLanding,
       ),
-    );
-  }
-
-  Widget _hero(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: const BoxDecoration(gradient: AppColors.evaGradient),
-      child: SafeArea(
-        bottom: false,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(
-            AppSpacing.lg,
-            AppSpacing.md,
-            AppSpacing.lg,
-            AppSpacing.xl,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const NutrizLogo(size: 40, light: true),
-                  TextButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, AppRoutes.login),
-                    child: const Text(
-                      'Entrar',
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: AppSpacing.xl),
-              const Text(
-                'Cada gota multiplica vidas.',
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 32,
-                  fontWeight: FontWeight.w800,
-                  height: 1.15,
-                ),
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              const Text(
-                'A Nutriz conecta nutrizes doadoras ao banco de leite humano da '
-                'Lactare - do cadastro a coleta na sua casa.',
-                style:
-                    TextStyle(color: Colors.white70, fontSize: 15, height: 1.4),
-              ),
-              const SizedBox(height: AppSpacing.lg),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.white,
-                  foregroundColor: AppColors.navy,
-                ),
-                onPressed: () =>
-                    Navigator.pushNamed(context, AppRoutes.register),
-                child: const Text('Quero doar'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _Passo extends StatelessWidget {
-  final String numero;
-  final String titulo;
-  final String texto;
-
-  const _Passo({
-    required this.numero,
-    required this.titulo,
-    required this.texto,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: AppSpacing.md),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          Container(
-            width: 36,
-            height: 36,
-            decoration: const BoxDecoration(
-              color: AppColors.blueSoft,
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: Text(
-                numero,
-                style: const TextStyle(
-                  color: AppColors.navy,
-                  fontWeight: FontWeight.w800,
+          SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              children: [
+                LandingHero(
+                  onSaibaMais: () => _irParaSecao('Como funciona'),
                 ),
-              ),
+                const LandingStats(),
+                Container(
+                  key: _chaves['Como funciona'],
+                  child: const LandingHowItWorks(),
+                ),
+                Container(
+                  key: _chaves['Pontos de coleta'],
+                  child: const LandingPoints(),
+                ),
+                Container(
+                  key: _chaves['A EVA'],
+                  child: LandingEva(onAbrirEva: _abrirEva),
+                ),
+                Container(
+                  key: _chaves['Artigos'],
+                  child: const LandingArticles(),
+                ),
+                Container(
+                  key: _chaves['Depoimentos'],
+                  child: const LandingTestimonials(),
+                ),
+                const LandingCta(),
+                LandingFooter(onIrParaSecao: _irParaSecao),
+              ],
             ),
           ),
-          const SizedBox(width: AppSpacing.md),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          _header(),
+        ],
+      ),
+    );
+  }
+
+  Widget _header() {
+    return Positioned(
+      top: 0,
+      left: 0,
+      right: 0,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        color: _rolou ? AppColors.heroNavy : Colors.transparent,
+        child: SafeArea(
+          bottom: false,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  titulo,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 15,
-                    color: AppColors.ink,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  texto,
-                  style: const TextStyle(
-                    color: AppColors.muted,
-                    fontSize: 13.5,
-                    height: 1.35,
+                const NutrizLogo(altura: 24),
+                Builder(
+                  builder: (context) => Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.white.withValues(alpha: 0.1),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          color: AppColors.white.withValues(alpha: 0.15)),
+                    ),
+                    child: IconButton(
+                      icon: const Icon(Icons.menu,
+                          color: AppColors.white, size: 24),
+                      tooltip: 'Abrir menu',
+                      onPressed: () => Scaffold.of(context).openEndDrawer(),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
 }
 
-class _Stat extends StatelessWidget {
-  final String valor;
-  final String label;
+/// Menu lateral da landing, espelhando o Sheet do LandingHeader.tsx.
+class _MenuLanding extends StatelessWidget {
+  final void Function(String secao) onIrParaSecao;
+  final List<SecaoLanding> secoes;
 
-  const _Stat({required this.valor, required this.label});
+  const _MenuLanding({required this.onIrParaSecao, required this.secoes});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          valor,
-          style: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w800,
-            color: AppColors.navy,
+    return Drawer(
+      width: 300,
+      backgroundColor: AppColors.white,
+      shape: const RoundedRectangleBorder(),
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            color: AppColors.drawerBlue,
+            padding: const EdgeInsets.fromLTRB(20, 40, 20, 24),
+            child: SafeArea(
+              bottom: false,
+              child: Stack(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const NutrizLogo(altura: 28),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Doe leite. Multiplique vidas.',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: AppColors.white.withValues(alpha: 0.7),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Positioned(
+                    top: -8,
+                    right: -8,
+                    child: IconButton(
+                      icon: Icon(Icons.close,
+                          color: AppColors.white.withValues(alpha: 0.8),
+                          size: 20),
+                      tooltip: 'Fechar menu',
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-        const SizedBox(height: 2),
-        Text(label,
-            style: const TextStyle(color: AppColors.muted, fontSize: 13)),
-      ],
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              children: secoes
+                  .map(
+                    (secao) => InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                        onIrParaSecao(secao.rotulo);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 16),
+                        child: Row(
+                          children: [
+                            Icon(secao.icone,
+                                size: 20, color: const Color(0xFF334155)),
+                            const SizedBox(width: 16),
+                            Text(
+                              secao.rotulo,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Color(0xFF334155),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+          const Divider(height: 1, color: AppColors.line),
+          SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.drawerBlue,
+                        minimumSize: const Size(0, 44),
+                        side: const BorderSide(color: Color(0xFFD0D9E8)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.login);
+                      },
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 15),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.drawerBlue,
+                        foregroundColor: AppColors.white,
+                        minimumSize: const Size(0, 44),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.register);
+                      },
+                      child: const Text(
+                        'Cadastrar-se',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 15),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
