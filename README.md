@@ -63,6 +63,32 @@ educativo real).
 
 ---
 
+## Prints das telas
+
+<!-- PREENCHER: substituir os placeholders por prints do APP RODANDO no
+     emulador/dispositivo. Prints de Figma/protótipo NÃO valem. Sugestão: salvar
+     os PNGs em `docs/prints/` e referenciar com Markdown, por exemplo:
+     ![Início](docs/prints/inicio.png) -->
+
+| Tela | Print |
+|------|-------|
+| Splash / Landing | <!-- PREENCHER --> |
+| Login (seletor de perfil) | <!-- PREENCHER --> |
+| Cadastro + tela de sucesso | <!-- PREENCHER --> |
+| Início da doadora | <!-- PREENCHER --> |
+| Detalhe da doação (timeline) | <!-- PREENCHER --> |
+| Pontos de coleta | <!-- PREENCHER --> |
+| Conteúdo / detalhe do artigo | <!-- PREENCHER --> |
+| Chat da EVA | <!-- PREENCHER --> |
+| Painel do administrador | <!-- PREENCHER --> |
+| Agendamentos (enfermeiro) | <!-- PREENCHER --> |
+
+**Como capturar:** com o app aberto no emulador, use o botão de câmera na barra
+lateral do emulador ou rode `flutter screenshot`, e salve os arquivos na pasta
+de prints.
+
+---
+
 ## Como executar
 
 Pré-requisito: **Flutter instalado** (canal stable) e um **emulador Android** (ou
