@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
+import '../../widgets/app_drawer.dart';
+import '../../widgets/app_header.dart';
 import '../content/content_screen.dart';
 import '../donations/donations_screen.dart';
 import '../eva/eva_chat_screen.dart';
@@ -8,6 +10,9 @@ import '../points/points_screen.dart';
 import '../profile/profile_screen.dart';
 import 'home_screen.dart';
 
+/// Casca do app autenticado. Segue o chrome do web-nutriz: header navy fixo
+/// com wordmark centralizada e menu lateral direito (AppDrawer) - a navegacao
+/// entre areas acontece pelo menu, nao por barra inferior.
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
 
@@ -38,6 +43,13 @@ class _HomeShellState extends State<HomeShell> {
     ];
 
     return Scaffold(
+      backgroundColor: AppColors.surface,
+      appBar: const AppHeader(),
+      endDrawer: AppDrawer(
+        abaAtual: _index,
+        onSelecionarAba: _irParaAba,
+        onAbrirEva: _abrirEva,
+      ),
       body: IndexedStack(index: _index, children: telas),
       floatingActionButton: FloatingActionButton(
         onPressed: _abrirEva,
@@ -45,37 +57,6 @@ class _HomeShellState extends State<HomeShell> {
         foregroundColor: AppColors.white,
         tooltip: 'Falar com a EVA',
         child: const Icon(Icons.chat_bubble_outline),
-      ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _index,
-        onDestinationSelected: _irParaAba,
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: 'Inicio',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.favorite_outline),
-            selectedIcon: Icon(Icons.favorite),
-            label: 'Doacoes',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.place_outlined),
-            selectedIcon: Icon(Icons.place),
-            label: 'Pontos',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.menu_book_outlined),
-            selectedIcon: Icon(Icons.menu_book),
-            label: 'Conteudo',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'Perfil',
-          ),
-        ],
       ),
     );
   }
