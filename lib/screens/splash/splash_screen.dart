@@ -46,7 +46,7 @@ class SplashScreen extends StatelessWidget {
                     foregroundColor: AppColors.navy,
                   ),
                   onPressed: () =>
-                      Navigator.pushReplacementNamed(context, AppRoutes.login),
+                      Navigator.pushReplacementNamed(context, AppRoutes.landing),
                   child: const Text('Comecar'),
                 ),
                 const SizedBox(height: AppSpacing.md),
