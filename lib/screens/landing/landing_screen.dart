@@ -138,27 +138,156 @@ class _LandingScreenState extends State<LandingScreen> {
           child: ContentContainer(
             espacoAcima: 12,
             espacoAbaixo: 12,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const NutrizLogo(altura: 24),
-                Builder(
-                  builder: (context) => Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.white.withValues(alpha: 0.1),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          color: AppColors.white.withValues(alpha: 0.15)),
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.menu,
-                          color: AppColors.white, size: 24),
-                      tooltip: 'Abrir menu',
-                      onPressed: () => Scaffold.of(context).openEndDrawer(),
-                    ),
-                  ),
-                ),
-              ],
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                // No site a navegacao completa aparece a partir de lg e o
+                // botao de menu fica escondido (`lg:hidden`).
+                final navCompleta = constraints.maxWidth >= 940;
+
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const NutrizLogo(altura: 24),
+                    if (navCompleta) ...[
+                      _navSecoes(),
+                      _acoesEntrada(context),
+                    ] else
+                      _botaoMenu(),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Pilula com os links das secoes, como a `nav` do LandingHeader.tsx.
+  Widget _navSecoes() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      decoration: BoxDecoration(
+        color: AppColors.white.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: AppColors.white.withValues(alpha: 0.15)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: secoesLanding
+            .map(
+              (secao) => _LinkSecao(
+                rotulo: secao.rotulo,
+                onTap: () => _irParaSecao(secao.rotulo),
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+
+  /// Login e Cadastrar-se, os dois botoes a direita do header no site.
+  Widget _acoesEntrada(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          height: 44,
+          child: OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              foregroundColor: AppColors.white,
+              backgroundColor: AppColors.white.withValues(alpha: 0.1),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              side: BorderSide(color: AppColors.white.withValues(alpha: 0.15)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(999),
+              ),
+            ),
+            onPressed: () => Navigator.pushNamed(context, AppRoutes.login),
+            child: const Text(
+              'Login',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            ),
+          ),
+        ),
+        const SizedBox(width: 8),
+        SizedBox(
+          height: 44,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.white,
+              foregroundColor: AppColors.heroNavy,
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(999),
+              ),
+            ),
+            onPressed: () => Navigator.pushNamed(context, AppRoutes.register),
+            child: const Text(
+              'Cadastrar-se',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _botaoMenu() {
+    return Builder(
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          color: AppColors.white.withValues(alpha: 0.1),
+          shape: BoxShape.circle,
+          border: Border.all(color: AppColors.white.withValues(alpha: 0.15)),
+        ),
+        child: IconButton(
+          icon: const Icon(Icons.menu, color: AppColors.white, size: 24),
+          tooltip: 'Abrir menu',
+          onPressed: () => Scaffold.of(context).openEndDrawer(),
+        ),
+      ),
+    );
+  }
+}
+
+/// Link de secao do header, com realce ao passar o mouse como no site.
+class _LinkSecao extends StatefulWidget {
+  final String rotulo;
+  final VoidCallback onTap;
+
+  const _LinkSecao({required this.rotulo, required this.onTap});
+
+  @override
+  State<_LinkSecao> createState() => _LinkSecaoState();
+}
+
+class _LinkSecaoState extends State<_LinkSecao> {
+  bool _sobre = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _sobre = true),
+      onExit: (_) => setState(() => _sobre = false),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: _sobre
+                ? AppColors.white.withValues(alpha: 0.15)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(999),
+          ),
+          child: Text(
+            widget.rotulo,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: _sobre ? AppColors.white : AppColors.onNavy,
             ),
           ),
         ),
