@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'core/routes.dart';
 import 'core/theme/app_theme.dart';
+import 'screens/adm/adm_shell.dart';
 import 'screens/home/home_shell.dart';
+import 'screens/nurse/nurse_shell.dart';
 import 'screens/landing/landing_screen.dart';
 import 'screens/login/login_screen.dart';
 import 'screens/register/register_screen.dart';
@@ -24,6 +26,8 @@ class NutrizApp extends StatelessWidget {
         AppRoutes.login: (_) => const LoginScreen(),
         AppRoutes.register: (_) => const RegisterScreen(),
         AppRoutes.home: (_) => const HomeShell(),
+        AppRoutes.adm: (_) => const AdmShell(),
+        AppRoutes.nurse: (_) => const NurseShell(),
       },
     );
   }

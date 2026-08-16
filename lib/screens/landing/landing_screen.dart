@@ -7,8 +7,8 @@ import '../../core/theme/app_colors.dart';
 import '../../data/mock_landing.dart';
 import '../../widgets/content_container.dart';
 import '../../widgets/eva_fab.dart';
+import '../../widgets/eva_widget.dart';
 import '../../widgets/nutriz_logo.dart';
-import '../eva/eva_chat_screen.dart';
 import 'components/landing_articles.dart';
 import 'components/landing_cta.dart';
 import 'components/landing_eva.dart';
@@ -71,12 +71,7 @@ class _LandingScreenState extends State<LandingScreen> {
   }
 
   void _abrirEva([String? sugestao]) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => EvaChatScreen(perguntaInicial: sugestao),
-      ),
-    );
+    mostrarEvaWidget(context, perguntaInicial: sugestao);
   }
 
   @override

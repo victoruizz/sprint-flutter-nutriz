@@ -6,4 +6,9 @@ class AppRoutes {
   static const String login = '/login';
   static const String register = '/register';
   static const String home = '/home';
+
+  /// Areas internas por perfil, como o roteador privado do web-nutriz separa
+  /// nutriz, administracao e enfermagem.
+  static const String adm = '/adm';
+  static const String nurse = '/enfermagem';
 }

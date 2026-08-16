@@ -4,9 +4,9 @@ import '../../core/theme/app_colors.dart';
 import '../../widgets/app_drawer.dart';
 import '../../widgets/app_header.dart';
 import '../../widgets/eva_fab.dart';
+import '../../widgets/eva_widget.dart';
 import '../content/content_screen.dart';
 import '../donations/donations_screen.dart';
-import '../eva/eva_chat_screen.dart';
 import '../points/points_screen.dart';
 import '../profile/profile_screen.dart';
 import 'home_screen.dart';
@@ -26,12 +26,7 @@ class _HomeShellState extends State<HomeShell> {
 
   void _irParaAba(int i) => setState(() => _index = i);
 
-  void _abrirEva() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => const EvaChatScreen()),
-    );
-  }
+  void _abrirEva() => mostrarEvaWidget(context);
 
   @override
   Widget build(BuildContext context) {

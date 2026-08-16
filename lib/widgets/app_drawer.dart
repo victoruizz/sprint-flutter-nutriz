@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../core/routes.dart';
 import '../core/theme/app_colors.dart';
+import '../data/mock_sessao.dart';
 import '../data/mock_usuaria.dart';
+import '../models/perfil.dart';
 
 /// Item do menu lateral: navega para uma aba (indice) ou dispara uma acao,
 /// como a EVA - que no produto real e um widget global, nao uma pagina.
@@ -24,47 +26,86 @@ class ItemMenu {
 /// web-nutriz/src/components/layout/AppDrawer.tsx: cabecalho azul com avatar
 /// de iniciais, itens de navegacao com marcador lateral no item ativo e
 /// "Sair da conta" no rodape.
+///
+/// Os itens seguem o `getUserMenu` do site, que muda conforme o perfil.
 class AppDrawer extends StatelessWidget {
   final int abaAtual;
   final ValueChanged<int> onSelecionarAba;
-  final VoidCallback onAbrirEva;
+
+  /// So a nutriz doadora tem a EVA no menu - no produto real o chat e
+  /// exclusivo das doadoras.
+  final VoidCallback? onAbrirEva;
+
+  final PerfilUsuario perfil;
 
   const AppDrawer({
     super.key,
     required this.abaAtual,
     required this.onSelecionarAba,
-    required this.onAbrirEva,
+    this.onAbrirEva,
+    this.perfil = PerfilUsuario.nutriz,
   });
 
-  String get _iniciais {
-    final partes = usuariaMock.nome.trim().split(' ');
-    return partes
-        .take(2)
-        .map((p) => p.isEmpty ? '' : p[0])
-        .join()
-        .toUpperCase();
+  String get _nome => switch (perfil) {
+        PerfilUsuario.nutriz => usuariaMock.nome,
+        PerfilUsuario.adm => adminMock.nome,
+        PerfilUsuario.nurse => nurseMock.nome,
+      };
+
+  String get _iniciais => _nome
+      .trim()
+      .split(' ')
+      .take(2)
+      .map((p) => p.isEmpty ? '' : p[0])
+      .join()
+      .toUpperCase();
+
+  List<ItemMenu> _itens() {
+    switch (perfil) {
+      case PerfilUsuario.adm:
+        return const [
+          ItemMenu(rotulo: 'Dashboard', icone: Icons.dashboard_outlined, aba: 0),
+          ItemMenu(
+              rotulo: 'Gestao de Doacoes',
+              icone: Icons.assignment_outlined,
+              aba: 1),
+          ItemMenu(rotulo: 'Usuarios', icone: Icons.group_outlined, aba: 2),
+          ItemMenu(rotulo: 'Perfil', icone: Icons.person_outline, aba: 3),
+        ];
+      case PerfilUsuario.nurse:
+        return const [
+          ItemMenu(
+              rotulo: 'Meus Agendamentos',
+              icone: Icons.event_available_outlined,
+              aba: 0),
+          ItemMenu(rotulo: 'Perfil', icone: Icons.person_outline, aba: 1),
+        ];
+      case PerfilUsuario.nutriz:
+        return [
+          const ItemMenu(rotulo: 'Inicio', icone: Icons.home_outlined, aba: 0),
+          const ItemMenu(
+              rotulo: 'Pontos de Coleta', icone: Icons.place_outlined, aba: 2),
+          const ItemMenu(
+              rotulo: 'Minhas doacoes',
+              icone: Icons.water_drop_outlined,
+              aba: 1),
+          const ItemMenu(
+              rotulo: 'Conteudo educativo',
+              icone: Icons.menu_book_outlined,
+              aba: 3),
+          const ItemMenu(rotulo: 'Perfil', icone: Icons.person_outline, aba: 4),
+          if (onAbrirEva != null)
+            ItemMenu(
+              rotulo: 'EVA - Assistente Virtual',
+              icone: Icons.chat_bubble_outline,
+              acao: onAbrirEva,
+            ),
+        ];
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final itens = <ItemMenu>[
-      const ItemMenu(rotulo: 'Inicio', icone: Icons.home_outlined, aba: 0),
-      const ItemMenu(
-          rotulo: 'Pontos de Coleta', icone: Icons.place_outlined, aba: 2),
-      const ItemMenu(
-          rotulo: 'Minhas doacoes', icone: Icons.water_drop_outlined, aba: 1),
-      const ItemMenu(
-          rotulo: 'Conteudo educativo',
-          icone: Icons.menu_book_outlined,
-          aba: 3),
-      const ItemMenu(rotulo: 'Perfil', icone: Icons.person_outline, aba: 4),
-      ItemMenu(
-        rotulo: 'EVA - Assistente Virtual',
-        icone: Icons.chat_bubble_outline,
-        acao: onAbrirEva,
-      ),
-    ];
-
     return Drawer(
       width: 300,
       backgroundColor: AppColors.white,
@@ -75,7 +116,7 @@ class AppDrawer extends StatelessWidget {
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              children: itens.map((item) => _item(context, item)).toList(),
+              children: _itens().map((item) => _item(context, item)).toList(),
             ),
           ),
           const Divider(height: 1, color: AppColors.line),
@@ -116,7 +157,7 @@ class AppDrawer extends StatelessWidget {
                 const SizedBox(width: 16),
                 Expanded(
                   child: Text(
-                    usuariaMock.nome,
+                    _nome,
                     style: const TextStyle(
                       color: AppColors.white,
                       fontWeight: FontWeight.w600,

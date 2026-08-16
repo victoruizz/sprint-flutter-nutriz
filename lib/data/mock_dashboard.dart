@@ -1,13 +1,12 @@
-class MetricaDashboard {
-  final String titulo;
-  final String valor;
-  final String subtitulo;
+// Indicadores do painel administrativo, espelhando os cards do dashboard do
+// web-nutriz (pages/private/dashboard): litros por mes, doacoes ativas por
+// etapa, satisfacao, recorrencia, tempo de resposta e doacoes com erro.
 
-  const MetricaDashboard({
-    required this.titulo,
-    required this.valor,
-    required this.subtitulo,
-  });
+class LeitePorMes {
+  final String mes;
+  final int litros;
+
+  const LeitePorMes({required this.mes, required this.litros});
 }
 
 class EtapaContagem {
@@ -17,37 +16,28 @@ class EtapaContagem {
   const EtapaContagem({required this.etapa, required this.total});
 }
 
-const List<MetricaDashboard> metricasMock = [
-  MetricaDashboard(
-    titulo: 'Litros Captados no Mes',
-    valor: '128 L',
-    subtitulo: 'Volume total de leite coletado, todas as doadoras',
-  ),
-  MetricaDashboard(
-    titulo: 'Doacoes Ativas',
-    valor: '37',
-    subtitulo: 'Doacoes em andamento no periodo',
-  ),
-  MetricaDashboard(
-    titulo: 'Nivel de Satisfacao',
-    valor: '4.8 / 5',
-    subtitulo: 'Media das avaliacoes das doadoras',
-  ),
-  MetricaDashboard(
-    titulo: 'Taxa de Recorrencia',
-    valor: '62%',
-    subtitulo: 'Doadoras que ajudaram mais de uma vez',
-  ),
-  MetricaDashboard(
-    titulo: 'Tempo Medio de Resposta',
-    valor: '1.4 dias',
-    subtitulo: 'Triagem ate a 1a coleta agendada',
-  ),
-  MetricaDashboard(
-    titulo: 'Doacoes com Erro',
-    valor: '3',
-    subtitulo: 'Ocorrencias no periodo selecionado',
-  ),
+class AvaliacaoContagem {
+  final int estrelas;
+  final int total;
+
+  const AvaliacaoContagem({required this.estrelas, required this.total});
+}
+
+/// Opcoes do filtro de periodo (PERIOD_PRESET_OPTIONS do site).
+const List<String> periodosDashboard = [
+  'Este mes',
+  'Ultimos 3 meses',
+  'Ultimos 6 meses',
+  'Este ano',
+];
+
+const List<LeitePorMes> leitePorMesMock = [
+  LeitePorMes(mes: 'MAR', litros: 82),
+  LeitePorMes(mes: 'ABR', litros: 97),
+  LeitePorMes(mes: 'MAI', litros: 110),
+  LeitePorMes(mes: 'JUN', litros: 104),
+  LeitePorMes(mes: 'JUL', litros: 121),
+  LeitePorMes(mes: 'AGO', litros: 128),
 ];
 
 const List<EtapaContagem> doacoesPorEtapaMock = [
@@ -58,3 +48,19 @@ const List<EtapaContagem> doacoesPorEtapaMock = [
   EtapaContagem(etapa: 'Analise Laboratorial', total: 5),
   EtapaContagem(etapa: 'Processamento e Distribuicao', total: 4),
 ];
+
+const List<AvaliacaoContagem> avaliacoesMock = [
+  AvaliacaoContagem(estrelas: 5, total: 148),
+  AvaliacaoContagem(estrelas: 4, total: 52),
+  AvaliacaoContagem(estrelas: 3, total: 14),
+  AvaliacaoContagem(estrelas: 2, total: 5),
+  AvaliacaoContagem(estrelas: 1, total: 3),
+];
+
+/// Taxa de doadoras que doaram mais de uma vez.
+const double taxaRecorrenciaMock = 62;
+
+/// Horas medias entre a triagem e a primeira coleta agendada.
+const double tempoMedioRespostaHorasMock = 33.6;
+
+const int doacoesComErroMock = 3;
