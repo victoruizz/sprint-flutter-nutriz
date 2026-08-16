@@ -67,31 +67,41 @@ Padrões herdados do site:
 5. **Início** — bloco navy com a saudação, botões "Nova Doação" e "Falar com a
    EVA", cartão da próxima etapa, seções **Seu Impacto** (doações, leite doado,
    bebês alimentados), **Status** e **Rede de apoio**.
-6. **Minhas doações** — lista das doações com status e progresso.
-7. **Detalhe da doação** — recebe a doação por parâmetro; linha do tempo com as
+6. **Minhas doações** — lista das doações com status e progresso, e o botão
+   para iniciar uma nova.
+7. **Nova doação** — a nutriz confirma o interesse e vê o que vai acontecer:
+   confirmação, contato da equipe, triagem/agendamento e acompanhamento.
+8. **Detalhe da doação** — recebe a doação por parâmetro; linha do tempo com as
    etapas reais do fluxo Lactare.
-8. **Pontos de coleta** — lista com endereço, distância e status.
-9. **Detalhe do ponto** — recebe o ponto por parâmetro; dados e "solicitar coleta".
-10. **Conteúdo educativo** — artigo em destaque com capa e grade de cards.
-11. **Detalhe do artigo** — recebe o artigo por parâmetro; selo da categoria,
+9. **Detalhe da etapa** — recebe a etapa por parâmetro; data, endereço,
+   responsável e o texto sobre aquela etapa.
+10. **Pontos de coleta** — lista com endereço, distância e status.
+11. **Detalhe do ponto** — recebe o ponto por parâmetro; dados e "solicitar coleta".
+12. **Conteúdo educativo** — artigo em destaque com capa e grade de cards.
+13. **Detalhe do artigo** — recebe o artigo por parâmetro; selo da categoria,
     autor, data, selo rBLH/Fiocruz, capa, "O que você vai aprender" e bio.
-12. **EVA (widget flutuante)** — abre por cima do conteúdo com sugestões,
+14. **EVA (widget flutuante)** — abre por cima do conteúdo com sugestões,
     "digitando" simulado, respostas por palavra-chave e aviso de que não
     substitui avaliação médica.
-13. **Perfil** — dados da nutriz, bebê e endereço; sair.
+15. **Perfil** — abas "Meus dados" e "Meu bebê", campos editáveis e barra de
+    ações que aparece quando há alterações.
 
-**Administrador** — header + menu lateral
-14. **Painel** — filtro de período, litros captados por mês em barras, doações
+**Administração** — header + menu lateral
+16. **Painel** — filtro de período, litros captados por mês em barras, doações
     ativas por etapa, nível de satisfação, taxa de recorrência, tempo médio de
     resposta e doações com erro.
-15. **Gestão de doações** — busca, filtros e doações de todas as doadoras.
-16. **Usuários** — tabela com filtro por perfil e etiquetas por tipo de acesso.
-17. **Detalhe do usuário** — recebe o usuário por parâmetro; ativar/desativar.
+17. **Gestão de doações** — busca, filtros e doações de todas as doadoras.
+18. **Gestão da doação** — o controle de fato: cada etapa pode ser **agendada**
+    (data e enfermeira responsável), **finalizada** — o que libera a seguinte —
+    ou **marcada como erro**, encerrando a doação. Etapas ainda não liberadas
+    ficam bloqueadas e a última pede a quantidade doada.
+19. **Usuários** — tabela com filtro por perfil e etiquetas por tipo de acesso.
+20. **Detalhe do usuário** — recebe o usuário por parâmetro; ativar/desativar.
 
 **Enfermagem** — header + menu lateral
-18. **Agendamentos atribuídos** — abas de status (Em Andamento, Concluído, Com
+21. **Agendamentos atribuídos** — abas de status (Em Andamento, Concluído, Com
     Erro) e cards com doadora, data, local e etapa.
-19. **Detalhe do agendamento** — recebe o agendamento por parâmetro; preencher
+22. **Detalhe do agendamento** — recebe o agendamento por parâmetro; preencher
     relatório.
 
 > A EVA aparece apenas para a nutriz doadora — no produto real o chat é
@@ -133,7 +143,9 @@ nomes exibidos dentro do app batem com o login usado.
 | Pontos de coleta | Lista com distância e status | <!-- PREENCHER --> |
 | Conteúdo / artigo | Destaque, grade e detalhe do artigo | <!-- PREENCHER --> |
 | EVA | Painel flutuante aberto sobre a tela | <!-- PREENCHER --> |
+| Nova doação | "O que vai acontecer" e botão Confirmar | <!-- PREENCHER --> |
 | Painel do administrador | Gráfico de litros e cards de indicadores | <!-- PREENCHER --> |
+| Gestão da doação | Etapa liberada com agendar / finalizar / erro | <!-- PREENCHER --> |
 | Usuários | Tabela com filtro por perfil | <!-- PREENCHER --> |
 | Agendamentos (enfermagem) | Abas de status e cards | <!-- PREENCHER --> |
 
