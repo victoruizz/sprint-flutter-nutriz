@@ -33,9 +33,57 @@ class LandingHero extends StatelessWidget {
           ContentContainer(
             espacoAcima: 96,
             espacoAbaixo: 56,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                // No site o hero e `lg:grid-cols-2`: texto a esquerda e a
+                // imagem a direita. Abaixo disso os dois empilham.
+                final duasColunas = constraints.maxWidth >= 900;
+
+                if (duasColunas) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(child: _conteudo(context)),
+                      const SizedBox(width: 40),
+                      Expanded(child: _imagem(maxLargura: 512)),
+                    ],
+                  );
+                }
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _conteudo(context),
+                    const SizedBox(height: 32),
+                    _imagem(maxLargura: 448),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _imagem({required double maxLargura}) {
+    return Center(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: maxLargura),
+        child: Image.asset(
+          'assets/images/hero-mother-baby.png',
+          fit: BoxFit.contain,
+          semanticLabel: 'Mae amamentando seu bebe',
+        ),
+      ),
+    );
+  }
+
+  Widget _conteudo(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
                 const ActivityBadge(
                   rotulo: 'Faca sua doacao',
                   corPonto: AppColors.cyan,
@@ -60,17 +108,22 @@ class LandingHero extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'Uma gota do seu leite pode ser tudo que um bebe prematuro '
-                  'precisa para sobreviver.',
-                  style: TextStyle(
-                    color: AppColors.onNavy,
-                    fontSize: 15,
-                    height: 1.55,
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 448),
+                  child: const Text(
+                    'Uma gota do seu leite pode ser tudo que um bebe prematuro '
+                    'precisa para sobreviver.',
+                    style: TextStyle(
+                      color: AppColors.onNavy,
+                      fontSize: 15,
+                      height: 1.55,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 28),
-                Row(
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -90,7 +143,6 @@ class LandingHero extends StatelessWidget {
                             fontWeight: FontWeight.w600, fontSize: 15),
                       ),
                     ),
-                    const SizedBox(width: 12),
                     OutlinedButton(
                       style: OutlinedButton.styleFrom(
                         foregroundColor: AppColors.white,
@@ -111,19 +163,7 @@ class LandingHero extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 32),
-                Center(
-                  child: Image.asset(
-                    'assets/images/hero-mother-baby.png',
-                    fit: BoxFit.contain,
-                    semanticLabel: 'Mae amamentando seu bebe',
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+      ],
     );
   }
 
