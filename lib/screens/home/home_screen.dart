@@ -7,6 +7,7 @@ import '../../models/doacao.dart';
 import '../../models/etapa_doacao.dart';
 import '../../widgets/content_container.dart';
 import '../donations/donation_detail_screen.dart';
+import '../donations/new_donation_screen.dart';
 
 /// Home da nutriz, seguindo pages/private/home do web-nutriz: bloco navy com
 /// a saudacao e os dois botoes, a proxima etapa da doacao, o painel de
@@ -102,7 +103,12 @@ class HomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(999),
                         ),
                       ),
-                      onPressed: () => onIrParaAba(1),
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const NewDonationScreen(),
+                        ),
+                      ),
                       icon: const Icon(Icons.add, size: 18),
                       label: const Text(
                         'Nova Doacao',

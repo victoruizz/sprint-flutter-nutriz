@@ -10,6 +10,7 @@ import '../../widgets/page_title.dart';
 import '../../widgets/section_card.dart';
 import '../../widgets/status_badge.dart';
 import 'donation_detail_screen.dart';
+import 'new_donation_screen.dart';
 
 class DonationsScreen extends StatelessWidget {
   const DonationsScreen({super.key});
@@ -24,9 +25,41 @@ class DonationsScreen extends StatelessWidget {
       separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
       itemBuilder: (context, i) {
         if (i == 0) {
-          return const PageTitle(
-            titulo: 'Minhas doacoes',
-            descricao: 'Acompanhe cada etapa das suas doacoes.',
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const PageTitle(
+                titulo: 'Minhas doacoes',
+                descricao: 'Acompanhe cada etapa das suas doacoes.',
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.navy,
+                    foregroundColor: AppColors.white,
+                    minimumSize: const Size(0, 44),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                  ),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const NewDonationScreen(),
+                    ),
+                  ),
+                  icon: const Icon(Icons.add, size: 18),
+                  label: const Text(
+                    'Nova doacao',
+                    style:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
+            ],
           );
         }
 

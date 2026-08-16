@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../core/date_format.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../data/mock_usuaria.dart';
 import '../../models/doacao.dart';
 import '../../widgets/app_page.dart';
+import 'step_detail_screen.dart';
 import '../../widgets/section_card.dart';
 import '../../widgets/timeline_tile.dart';
 
@@ -70,8 +72,25 @@ class DonationDetailScreen extends StatelessWidget {
               ),
             ),
           ),
+          // Cada etapa abre o proprio detalhe, como no site.
           for (int i = 0; i < etapas.length; i++)
-            TimelineTile(etapa: etapas[i], ultima: i == etapas.length - 1),
+            InkWell(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => StepDetailScreen(
+                    etapa: etapas[i],
+                    numero: i + 1,
+                    enderecoColeta:
+                        usuariaMock.endereco?.linhaCompleta ?? 'A definir',
+                  ),
+                ),
+              ),
+              child: TimelineTile(
+                etapa: etapas[i],
+                ultima: i == etapas.length - 1,
+              ),
+            ),
         ],
       ),
     );

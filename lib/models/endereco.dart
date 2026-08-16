@@ -18,4 +18,7 @@ class Endereco {
   String get linha => '$rua, $numero';
 
   String get resumo => '$bairro, $cidade/$uf';
+
+  /// Endereco completo numa linha so, como o site exibe no detalhe da etapa.
+  String get linhaCompleta => '$linha - $bairro, $cidade - $uf, $cep';
 }
