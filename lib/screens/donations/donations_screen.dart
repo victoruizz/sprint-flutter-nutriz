@@ -5,6 +5,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../data/mock_doacoes.dart';
 import '../../models/etapa_doacao.dart';
+import '../../widgets/content_container.dart';
 import '../../widgets/page_title.dart';
 import '../../widgets/section_card.dart';
 import '../../widgets/status_badge.dart';
@@ -15,8 +16,10 @@ class DonationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: const EdgeInsets.all(AppSpacing.md),
+    return ContentContainer(
+      larguraMaxima: 1100,
+      child: ListView.separated(
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
       itemCount: doacoesMock.length + 1,
       separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
       itemBuilder: (context, i) {
@@ -86,6 +89,7 @@ class DonationsScreen extends StatelessWidget {
             ),
         );
       },
+      ),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../widgets/content_container.dart';
 import '../../widgets/page_title.dart';
 import '../../data/mock_sessao.dart';
 import '../../data/mock_usuaria.dart';
@@ -51,8 +52,10 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final d = _dados;
-    return ListView(
-      padding: const EdgeInsets.all(AppSpacing.md),
+    return ContentContainer(
+      larguraMaxima: 1100,
+      child: ListView(
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
       children: [
         const PageTitle(titulo: 'Perfil'),
           Row(
@@ -111,6 +114,7 @@ class ProfileScreen extends StatelessWidget {
             label: const Text('Sair'),
           ),
       ],
+      ),
     );
   }
 

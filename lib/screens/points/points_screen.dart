@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../data/mock_pontos.dart';
+import '../../widgets/content_container.dart';
 import '../../widgets/page_title.dart';
 import '../../widgets/section_card.dart';
 import 'point_detail_screen.dart';
@@ -12,8 +13,10 @@ class PointsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: const EdgeInsets.all(AppSpacing.md),
+    return ContentContainer(
+      larguraMaxima: 1100,
+      child: ListView.separated(
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
       itemCount: pontosMock.length + 1,
       separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
       itemBuilder: (context, i) {
@@ -89,6 +92,7 @@ class PointsScreen extends StatelessWidget {
             ),
         );
       },
+      ),
     );
   }
 }

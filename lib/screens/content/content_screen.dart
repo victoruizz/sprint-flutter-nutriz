@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../data/mock_artigos.dart';
 import '../../models/artigo.dart';
+import '../../widgets/content_container.dart';
 import '../../widgets/page_title.dart';
 import 'article_detail_screen.dart';
 
@@ -16,7 +17,9 @@ class ContentScreen extends StatelessWidget {
     final destaque = artigosMock.first;
     final demais = artigosMock.skip(1).toList();
 
-    return ListView(
+    return ContentContainer(
+      larguraMaxima: 1100,
+      child: ListView(
       padding: const EdgeInsets.symmetric(vertical: 16),
       children: [
         const PageTitle(
@@ -60,6 +63,7 @@ class ContentScreen extends StatelessWidget {
           },
         ),
       ],
+      ),
     );
   }
 }

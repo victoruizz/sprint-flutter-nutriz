@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../widgets/app_drawer.dart';
 import '../../widgets/app_header.dart';
-import '../../widgets/content_container.dart';
 import '../../widgets/eva_fab.dart';
 import '../content/content_screen.dart';
 import '../donations/donations_screen.dart';
@@ -52,12 +51,9 @@ class _HomeShellState extends State<HomeShell> {
         onSelecionarAba: _irParaAba,
         onAbrirEva: _abrirEva,
       ),
-      // O conteudo das telas internas fica numa coluna com respiro lateral,
-      // como o `p-5` do Layout.tsx, em vez de colar nas bordas.
-      body: ContentContainer(
-        larguraMaxima: 1100,
-        child: IndexedStack(index: _index, children: telas),
-      ),
+      // Cada tela aplica o proprio respiro lateral: a home precisa que o
+      // bloco navy va de ponta a ponta, as demais ficam contidas.
+      body: IndexedStack(index: _index, children: telas),
       floatingActionButton: EvaFab(onPressed: _abrirEva),
     );
   }
