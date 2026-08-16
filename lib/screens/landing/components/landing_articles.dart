@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../data/mock_artigos.dart';
 import '../../../models/artigo.dart';
+import '../../../widgets/content_container.dart';
 import '../../content/article_detail_screen.dart';
 import 'section_label.dart';
 
@@ -18,8 +19,10 @@ class LandingArticles extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: AppColors.heroNavy,
-      padding: const EdgeInsets.fromLTRB(20, 48, 20, 56),
-      child: Column(
+      child: ContentContainer(
+        espacoAcima: 48,
+        espacoAbaixo: 56,
+        child: Column(
         children: [
           const SectionLabel(
               texto: 'CONTEUDO DE APOIO', cor: AppColors.cyanDeep),
@@ -59,13 +62,33 @@ class LandingArticles extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 32),
-          ...artigos.map(
-            (artigo) => Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: _CardArtigo(artigo: artigo),
-            ),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              // Mesma grade do site: 1 coluna no celular, 2 em telas medias
+              // e 4 no desktop.
+              final colunas = constraints.maxWidth >= 1000
+                  ? 4
+                  : constraints.maxWidth >= 640
+                      ? 2
+                      : 1;
+              const espaco = 24.0;
+              final largura =
+                  (constraints.maxWidth - espaco * (colunas - 1)) / colunas;
+
+              return Wrap(
+                spacing: espaco,
+                runSpacing: espaco,
+                children: artigos
+                    .map((artigo) => SizedBox(
+                          width: largura,
+                          child: _CardArtigo(artigo: artigo),
+                        ))
+                    .toList(),
+              );
+            },
           ),
         ],
+        ),
       ),
     );
   }

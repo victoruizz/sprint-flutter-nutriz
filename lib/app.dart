@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'core/routes.dart';
-import 'core/theme/app_colors.dart';
 import 'core/theme/app_theme.dart';
 import 'screens/home/home_shell.dart';
 import 'screens/landing/landing_screen.dart';
@@ -18,18 +17,6 @@ class NutrizApp extends StatelessWidget {
       title: 'Nutriz',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      // O app e desenhado para celular. Em telas largas (navegador, tablet)
-      // o conteudo fica centralizado numa coluna de leitura em vez de esticar
-      // de borda a borda - no celular a restricao nao tem efeito.
-      builder: (context, child) => ColoredBox(
-        color: AppColors.canvas,
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 460),
-            child: Material(color: AppColors.white, child: child),
-          ),
-        ),
-      ),
       initialRoute: AppRoutes.splash,
       routes: {
         AppRoutes.splash: (_) => const SplashScreen(),

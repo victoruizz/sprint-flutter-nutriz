@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../data/mock_landing.dart';
+import '../../../widgets/content_container.dart';
 import 'section_label.dart';
 
 /// CTA final da landing (FinalCtaSection.tsx): cartao navy com os dois
@@ -15,8 +16,10 @@ class LandingCta extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: AppColors.canvas,
-      padding: const EdgeInsets.fromLTRB(20, 48, 20, 56),
-      child: Container(
+      child: ContentContainer(
+        espacoAcima: 48,
+        espacoAbaixo: 56,
+        child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: AppColors.white,
@@ -153,6 +156,7 @@ class LandingCta extends StatelessWidget {
               ),
             ],
           ),
+        ),
         ),
       ),
     );

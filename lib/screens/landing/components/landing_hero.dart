@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/routes.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../widgets/content_container.dart';
 import 'section_label.dart';
 
 /// Hero da landing (HeroSection.tsx): fundo navy, badge, titulo em duas
@@ -29,8 +30,9 @@ class LandingHero extends StatelessWidget {
             right: -60,
             child: _halo(260, const Color(0xFF4F8FF0).withValues(alpha: 0.22)),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 24, 20, 56),
+          ContentContainer(
+            espacoAcima: 96,
+            espacoAbaixo: 56,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

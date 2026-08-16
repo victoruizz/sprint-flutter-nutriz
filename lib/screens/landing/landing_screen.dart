@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../data/mock_landing.dart';
+import '../../widgets/content_container.dart';
 import '../../widgets/nutriz_logo.dart';
 import '../eva/eva_chat_screen.dart';
 import 'components/landing_articles.dart';
@@ -134,8 +135,9 @@ class _LandingScreenState extends State<LandingScreen> {
         color: _rolou ? AppColors.heroNavy : Colors.transparent,
         child: SafeArea(
           bottom: false,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          child: ContentContainer(
+            espacoAcima: 12,
+            espacoAbaixo: 12,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

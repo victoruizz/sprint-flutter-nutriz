@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../data/mock_pontos.dart';
 import '../../../models/ponto_coleta.dart';
+import '../../../widgets/content_container.dart';
 import 'section_label.dart';
 
 /// Secao de pontos de coleta (CollectionPointsSection.tsx): busca, filtros
@@ -27,8 +28,10 @@ class _LandingPointsState extends State<LandingPoints> {
     return Container(
       width: double.infinity,
       color: AppColors.white,
-      padding: const EdgeInsets.fromLTRB(20, 48, 20, 24),
-      child: Column(
+      child: ContentContainer(
+        espacoAcima: 48,
+        espacoAbaixo: 24,
+        child: Column(
         children: [
           const SectionLabel(texto: 'PONTOS DE COLETA', cor: AppColors.blue),
           const SizedBox(height: 12),
@@ -93,6 +96,7 @@ class _LandingPointsState extends State<LandingPoints> {
             ),
           ),
         ],
+        ),
       ),
     );
   }

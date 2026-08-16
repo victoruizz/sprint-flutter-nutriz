@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../data/mock_landing.dart';
+import '../../../widgets/content_container.dart';
 import '../../../widgets/nutriz_logo.dart';
 
 /// Rodape da landing (LandingFooter.tsx): wordmark + assinatura da Lactare,
@@ -17,8 +18,10 @@ class LandingFooter extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: AppColors.footerNavy,
-      padding: const EdgeInsets.fromLTRB(20, 48, 20, 40),
-      child: Column(
+      child: ContentContainer(
+        espacoAcima: 48,
+        espacoAbaixo: 40,
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -121,6 +124,7 @@ class LandingFooter extends StatelessWidget {
             style: TextStyle(fontSize: 13, color: AppColors.onNavyMuted),
           ),
         ],
+        ),
       ),
     );
   }

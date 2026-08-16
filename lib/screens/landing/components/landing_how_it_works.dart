@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../data/mock_landing.dart';
+import '../../../widgets/content_container.dart';
 import 'section_label.dart';
 
 /// Secao "Como funciona" (HowItWorksSection.tsx): cartao com a foto do banco
@@ -14,8 +15,10 @@ class LandingHowItWorks extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: AppColors.canvas,
-      padding: const EdgeInsets.fromLTRB(20, 40, 20, 56),
-      child: Column(
+      child: ContentContainer(
+        espacoAcima: 40,
+        espacoAbaixo: 56,
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SectionLabel(texto: 'COMO FUNCIONA', cor: Color(0xFF0F9D8C)),
@@ -48,6 +51,7 @@ class LandingHowItWorks extends StatelessWidget {
           ),
           _cardWhatsApp(context),
         ],
+        ),
       ),
     );
   }

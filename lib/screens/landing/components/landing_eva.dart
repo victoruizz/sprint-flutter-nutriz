@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../data/mock_landing.dart';
+import '../../../widgets/content_container.dart';
 
 /// Secao da EVA (EvaSection.tsx): bloco com o gradiente pastel da marca,
 /// previa da conversa e chips de sugestao que abrem o chat.
@@ -15,8 +16,10 @@ class LandingEva extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: AppColors.white,
-      padding: const EdgeInsets.fromLTRB(20, 24, 20, 48),
-      child: Column(
+      child: ContentContainer(
+        espacoAcima: 24,
+        espacoAbaixo: 48,
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
@@ -146,6 +149,7 @@ class LandingEva extends StatelessWidget {
                 .toList(),
           ),
         ],
+        ),
       ),
     );
   }

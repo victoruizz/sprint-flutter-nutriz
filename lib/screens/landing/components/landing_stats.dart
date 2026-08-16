@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../data/mock_landing.dart';
+import '../../../widgets/content_container.dart';
 
 /// Faixa de metricas que sobrepoe o hero (StatsBar.tsx + MetricCard.tsx).
 class LandingStats extends StatelessWidget {
@@ -11,14 +12,41 @@ class LandingStats extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.canvas,
-      padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
-      child: Column(
-        children: metricasLanding
-            .map((m) => Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: _MetricCard(metrica: m),
-                ))
-            .toList(),
+      child: ContentContainer(
+        larguraMaxima: 1100,
+        espacoAcima: 24,
+        espacoAbaixo: 8,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            // No site as tres metricas ficam lado a lado a partir de lg.
+            final emLinha = constraints.maxWidth >= 720;
+            final cartoes = metricasLanding
+                .map((m) => _MetricCard(metrica: m))
+                .toList();
+
+            if (emLinha) {
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (var i = 0; i < cartoes.length; i++) ...[
+                    if (i > 0) const SizedBox(width: 24),
+                    Expanded(child: cartoes[i]),
+                  ],
+                ],
+              );
+            }
+
+            return Column(
+              children: [
+                for (final cartao in cartoes)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: cartao,
+                  ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
