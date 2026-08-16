@@ -12,15 +12,23 @@ class NutrizLogo extends StatelessWidget {
 
   const NutrizLogo({super.key, this.altura = 28, this.light = true});
 
+  /// Proporcao do arquivo original (516x135). A largura e fixada a partir da
+  /// altura para o espaco da logo ja ficar reservado no primeiro frame - sem
+  /// isso a imagem mede zero ate carregar e os vizinhos ocupam o lugar dela.
+  static const double _proporcao = 516 / 135;
+
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      light
-          ? 'assets/images/nutriz-wordmark-white.png'
-          : 'assets/images/nutriz-wordmark-blue.png',
+    return SizedBox(
       height: altura,
-      fit: BoxFit.contain,
-      semanticLabel: 'Nutriz',
+      width: altura * _proporcao,
+      child: Image.asset(
+        light
+            ? 'assets/images/nutriz-wordmark-white.png'
+            : 'assets/images/nutriz-wordmark-blue.png',
+        fit: BoxFit.contain,
+        semanticLabel: 'Nutriz',
+      ),
     );
   }
 }

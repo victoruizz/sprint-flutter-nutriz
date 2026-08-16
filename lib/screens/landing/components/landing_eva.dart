@@ -170,18 +170,23 @@ class LandingEva extends StatelessWidget {
             onTap: () => onAbrirEva(s),
             child: Container(
               constraints: const BoxConstraints(minHeight: 44),
-              alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(horizontal: 18),
               decoration: BoxDecoration(
                 color: const Color(0xFFFCE7EF),
                 borderRadius: BorderRadius.circular(999),
               ),
-              child: Text(
-                s,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFFB8386A),
+              // widthFactor: 1 mantem o chip do tamanho do texto - sem isso
+              // o Container estica ate a largura toda e cada chip ocupa uma
+              // linha inteira.
+              child: Center(
+                widthFactor: 1,
+                child: Text(
+                  s,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFFB8386A),
+                  ),
                 ),
               ),
             ),
