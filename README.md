@@ -22,44 +22,80 @@ educativo real).
 
 ---
 
+## Fidelidade ao produto real
+
+O layout, a identidade visual e os textos foram extraídos dos repositórios do
+projeto real, e não inventados:
+
+- **[web-nutriz](https://github.com/Nutriz-Inc/web-nutriz)** — telas, copy e
+  identidade visual. A landing, o header, o menu lateral, o login, o cadastro em
+  etapas, os cards do painel e os agendamentos seguem os componentes de lá.
+- **[nutriz-backend-service](https://github.com/Nutriz-Inc/nutriz-backend-service)**
+  — entidades e etapas da doação.
+- **[nutriz-ia-service](https://github.com/Nutriz-Inc/nutriz-ia-service)** —
+  persona, saudação e sugestões da EVA.
+
+Os **assets são os originais** do repositório web (wordmark, imagem do hero,
+foto do banco de leite e as capas dos artigos), copiados para `assets/`.
+
+Padrões herdados do site:
+
+| Elemento | Como é no app |
+|---|---|
+| Header | Barra navy com a wordmark centralizada e menu hambúrguer à direita |
+| Menu lateral | Abre à direita, cabeçalho azul com avatar de iniciais, item ativo com marcador e "Sair da conta" |
+| Largura do conteúdo | Coluna centralizada (1200px na landing, 1100px nas telas internas), nunca colado nas bordas |
+| Cores | Navy `#00458b`, azul `#387ccd`, ciano `#72f2eb`, teal `#0e9e94`, rosa `#f2579f` |
+| EVA | Botão flutuante com gradiente rosa→lilás; abre um **painel flutuante** no canto (400×620), não uma página |
+
+---
+
 ## Telas
 
 **Público**
 1. **Splash** — apresentação com a identidade do produto e botão "Começar".
-2. **Landing page** — proposta do produto, "como funciona" (cadastro → kit →
-   coleta → distribuição), impacto e chamadas para login/cadastro.
-3. **Login** — validação de e-mail/senha e **seletor de perfil** (Doadora,
-   Admin, Enfermeiro) para explorar cada área. Qualquer credencial válida entra.
-4. **Cadastro** — dados pessoais, endereço, bebê (opcional) e aceite de termos,
-   com feedback de sucesso ao concluir.
+2. **Landing page** — mesma sequência do site: hero "Doar Amor. / Multiplica
+   Vidas.", faixa de métricas, "Três passos para salvar uma vida", pontos de
+   coleta, bloco da EVA, artigos, depoimentos, CTA final e rodapé. O header traz
+   os links das seções (ou o menu hambúrguer em telas menores).
+3. **Login** — coluna estreita com círculos pastel, validação de e-mail/senha e
+   **seletor de perfil** (Doadora, Admin, Enfermagem) para explorar cada área.
+4. **Cadastro** — assistente de **4 etapas** (Dados pessoais → Endereço → Senha →
+   Bebê e termos) com indicador de progresso e tela de conta criada.
 
-**Doadora (nutriz)** — navegação inferior + botão flutuante da EVA
-5. **Início** — saudação personalizada, doação em andamento (barra de progresso)
-   e atalhos.
+**Doadora (nutriz)** — header + menu lateral + botão flutuante da EVA
+5. **Início** — bloco navy com a saudação, botões "Nova Doação" e "Falar com a
+   EVA", cartão da próxima etapa, seções **Seu Impacto** (doações, leite doado,
+   bebês alimentados), **Status** e **Rede de apoio**.
 6. **Minhas doações** — lista das doações com status e progresso.
 7. **Detalhe da doação** — recebe a doação por parâmetro; linha do tempo com as
    etapas reais do fluxo Lactare.
 8. **Pontos de coleta** — lista com endereço, distância e status.
 9. **Detalhe do ponto** — recebe o ponto por parâmetro; dados e "solicitar coleta".
-10. **Conteúdo educativo** — lista de artigos por categoria.
-11. **Detalhe do artigo** — recebe o artigo por parâmetro; corpo em seções.
-12. **EVA (chat mockado)** — sugestões, "digitando" simulado, respostas por
-    palavra-chave e aviso de que não substitui avaliação médica.
+10. **Conteúdo educativo** — artigo em destaque com capa e grade de cards.
+11. **Detalhe do artigo** — recebe o artigo por parâmetro; selo da categoria,
+    autor, data, selo rBLH/Fiocruz, capa, "O que você vai aprender" e bio.
+12. **EVA (widget flutuante)** — abre por cima do conteúdo com sugestões,
+    "digitando" simulado, respostas por palavra-chave e aviso de que não
+    substitui avaliação médica.
 13. **Perfil** — dados da nutriz, bebê e endereço; sair.
 
-**Administrador** — navegação inferior
-14. **Painel** — indicadores (litros captados, satisfação, recorrência, tempo
-    médio de resposta) e doações ativas por etapa.
-15. **Gestão de doações** — doações de todas as doadoras; abre a linha do tempo.
-16. **Usuários** — lista de doadoras/enfermeiros/administradores.
+**Administrador** — header + menu lateral
+14. **Painel** — filtro de período, litros captados por mês em barras, doações
+    ativas por etapa, nível de satisfação, taxa de recorrência, tempo médio de
+    resposta e doações com erro.
+15. **Gestão de doações** — busca, filtros e doações de todas as doadoras.
+16. **Usuários** — tabela com filtro por perfil e etiquetas por tipo de acesso.
 17. **Detalhe do usuário** — recebe o usuário por parâmetro; ativar/desativar.
 
-**Enfermeiro(a)** — navegação inferior
-18. **Agendamentos** — visitas/ações com doadora, endereço, etapa e status.
+**Enfermagem** — header + menu lateral
+18. **Agendamentos atribuídos** — abas de status (Em Andamento, Concluído, Com
+    Erro) e cards com doadora, data, local e etapa.
 19. **Detalhe do agendamento** — recebe o agendamento por parâmetro; preencher
     relatório.
 
-> Perfil e Splash são reaproveitados entre os perfis conforme o papel logado.
+> A EVA aparece apenas para a nutriz doadora — no produto real o chat é
+> exclusivo das doadoras.
 
 ---
 
@@ -68,14 +104,14 @@ educativo real).
 Não há autenticação real: **qualquer e-mail válido e senha com 6+ caracteres**
 entram. O perfil é escolhido no seletor da tela de login e define a área aberta:
 
-| Perfil | Como entrar | Área |
-|--------|-------------|------|
-| **Doadora** | e-mail válido + senha (6+) | Início, Doações, Pontos, Conteúdo, Perfil, EVA |
-| **Administrador** | selecionar "Admin" no login | Painel, Gestão de doações, Usuários, Perfil |
-| **Enfermeiro(a)** | selecionar "Enferm." no login | Agendamentos, Perfil |
+| Perfil | Selecionar | E-mail sugerido | Senha | Área |
+|--------|------------|-----------------|-------|------|
+| **Doadora** | `Doadora` | `mariana.alves@email.com` | `nutriz123` | Início, Doações, Pontos, Conteúdo, Perfil, EVA |
+| **Administração** | `Admin` | `carla.menezes@lactare.org` | `nutriz123` | Painel, Gestão de doações, Usuários, Perfil |
+| **Enfermagem** | `Enferm.` | `renata.souza@lactare.org` | `nutriz123` | Agendamentos, Perfil |
 
-Sugestão de credenciais para o vídeo (qualquer uma funciona):
-`mariana.alves@email.com` · `123456`.
+Os e-mails sugeridos são os mesmos que aparecem nos dados mockados, então os
+nomes exibidos dentro do app batem com o login usado.
 
 ---
 
@@ -86,18 +122,20 @@ Sugestão de credenciais para o vídeo (qualquer uma funciona):
      os PNGs em `docs/prints/` e referenciar com Markdown, por exemplo:
      ![Início](docs/prints/inicio.png) -->
 
-| Tela | Print |
-|------|-------|
-| Splash / Landing | <!-- PREENCHER --> |
-| Login (seletor de perfil) | <!-- PREENCHER --> |
-| Cadastro + tela de sucesso | <!-- PREENCHER --> |
-| Início da doadora | <!-- PREENCHER --> |
-| Detalhe da doação (timeline) | <!-- PREENCHER --> |
-| Pontos de coleta | <!-- PREENCHER --> |
-| Conteúdo / detalhe do artigo | <!-- PREENCHER --> |
-| Chat da EVA | <!-- PREENCHER --> |
-| Painel do administrador | <!-- PREENCHER --> |
-| Agendamentos (enfermeiro) | <!-- PREENCHER --> |
+| Tela | O que mostrar | Print |
+|------|---------------|-------|
+| Splash / Landing | Hero, métricas e header com os links das seções | <!-- PREENCHER --> |
+| Login | Card centralizado e seletor de perfil | <!-- PREENCHER --> |
+| Cadastro | Assistente de 4 etapas + tela de conta criada | <!-- PREENCHER --> |
+| Início da doadora | Bloco navy, próxima etapa e Seu Impacto | <!-- PREENCHER --> |
+| Menu lateral | Aberto, com avatar e itens do perfil | <!-- PREENCHER --> |
+| Detalhe da doação | Linha do tempo com as etapas | <!-- PREENCHER --> |
+| Pontos de coleta | Lista com distância e status | <!-- PREENCHER --> |
+| Conteúdo / artigo | Destaque, grade e detalhe do artigo | <!-- PREENCHER --> |
+| EVA | Painel flutuante aberto sobre a tela | <!-- PREENCHER --> |
+| Painel do administrador | Gráfico de litros e cards de indicadores | <!-- PREENCHER --> |
+| Usuários | Tabela com filtro por perfil | <!-- PREENCHER --> |
+| Agendamentos (enfermagem) | Abas de status e cards | <!-- PREENCHER --> |
 
 ---
 
@@ -107,28 +145,47 @@ Pré-requisito: **Flutter instalado** (canal stable) e um **emulador Android** (
 dispositivo com depuração USB).
 
 ```bash
-# 1) Gerar as pastas de plataforma (android/) - o repo traz so o codigo Dart.
-#    O nome do projeto e passado explicitamente porque a pasta tem hifens.
-flutter create --project-name nutriz_app --platforms=android .
-
-# 2) Baixar as dependencias
+# 1) Baixar as dependencias
 flutter pub get
 
-# 3) Conferir que nao ha erros
+# 2) Conferir que nao ha erros
 flutter analyze
 
-# 4) Rodar no emulador/dispositivo
+# 3) Rodar a suite de testes
+flutter test
+
+# 4) Rodar no emulador/dispositivo Android
 flutter run
 ```
 
-> O passo 1 apenas cria as pastas de plataforma; ele **não** sobrescreve o código
-> em `lib/`, o `pubspec.yaml` nem o `README.md` já existentes.
+Para revisar rapidamente no navegador (o app tambem roda na web):
+
+```bash
+flutter run -d chrome
+```
+
+> Se as pastas de plataforma nao existirem no seu clone, gere-as com
+> `flutter create --project-name nutriz_app --platforms=android,web .` — o
+> comando cria apenas as pastas de plataforma e **não** sobrescreve `lib/`,
+> `pubspec.yaml` nem este README.
+
+### Testes
+
+`flutter test` cobre o que costuma quebrar sem aparecer no `analyze`:
+
+- a landing monta sem estouro de layout em celular, tablet e desktop;
+- a wordmark aparece no header e não encosta na navegação nem no menu;
+- os chips da EVA mantêm a largura do texto e dividem a linha.
 
 ---
 
 ## Estrutura do projeto
 
 ```
+assets/
+├── images/                   # wordmark, logo colorida, hero, banco de leite
+└── artigos/                  # capas dos artigos (as mesmas do site)
+
 lib/
 ├── main.dart                 # ponto de entrada
 ├── app.dart                  # MaterialApp, tema e rotas
@@ -139,13 +196,25 @@ lib/
 ├── models/                   # Nutriz, Bebe, Endereco, Doacao, EtapaDoacao,
 │                             # PontoColeta, Artigo, MensagemEva, Agendamento...
 ├── data/                     # dados mockados (mock_doacoes, mock_pontos,
-│                             # mock_artigos, mock_eva, mock_usuarios, ...)
+│                             # mock_artigos, mock_landing, mock_dashboard, ...)
 ├── screens/                  # uma pasta por area (splash, landing, login,
 │                             # register, home, donations, points, content,
 │                             # eva, profile, adm, nurse)
-└── widgets/                  # componentes reutilizaveis (logo, card, badges,
-                              # timeline, bolha de chat, chips)
+│   └── landing/components/   # secoes da landing, uma por arquivo
+└── widgets/                  # componentes reutilizaveis
 ```
+
+Componentes que padronizam o app:
+
+| Widget | Papel |
+|---|---|
+| `AppHeader` | Barra navy com a wordmark e o botão de menu |
+| `AppDrawer` | Menu lateral, com itens conforme o perfil |
+| `AppPage` | Casca das telas empilhadas: barra + conteúdo centralizado |
+| `ContentContainer` | Coluna centralizada com respiro lateral (o `max-w` do site) |
+| `PageTitle` | Título e descrição no corpo da página |
+| `EvaFab` / `mostrarEvaWidget` | Botão flutuante e painel da EVA |
+| `FilterChips` / `SearchBarNutriz` / `DashboardCard` | Filtros, busca e cards do painel |
 
 - **Flutter puro**, Material Design, sem pacotes de terceiros.
 - Gerenciamento de estado simples (`setState`).
