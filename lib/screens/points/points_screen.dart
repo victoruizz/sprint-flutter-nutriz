@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../data/mock_pontos.dart';
+import '../../widgets/page_title.dart';
 import '../../widgets/section_card.dart';
 import 'point_detail_screen.dart';
 
@@ -11,15 +12,20 @@ class PointsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Pontos de coleta')),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        itemCount: pontosMock.length,
-        separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
-        itemBuilder: (context, i) {
-          final ponto = pontosMock[i];
-          return SectionCard(
+    return ListView.separated(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      itemCount: pontosMock.length + 1,
+      separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
+      itemBuilder: (context, i) {
+        if (i == 0) {
+          return const PageTitle(
+            titulo: 'Pontos de coleta',
+            descricao: 'Bancos de leite e postos proximos de voce.',
+          );
+        }
+
+        final ponto = pontosMock[i - 1];
+        return SectionCard(
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
@@ -81,9 +87,8 @@ class PointsScreen extends StatelessWidget {
                 ),
               ],
             ),
-          );
-        },
-      ),
+        );
+      },
     );
   }
 }

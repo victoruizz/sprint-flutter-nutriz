@@ -26,11 +26,9 @@ class HomeScreen extends StatelessWidget {
       orElse: () => doacoesMock.first,
     );
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('Nutriz')),
-      body: ListView(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        children: [
+    return ListView(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      children: [
           Text(
             'Ola, ${nutriz.primeiroNome}!',
             style: const TextStyle(
@@ -186,8 +184,7 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
+      ],
     );
   }
 

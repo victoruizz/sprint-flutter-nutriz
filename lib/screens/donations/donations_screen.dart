@@ -5,6 +5,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../data/mock_doacoes.dart';
 import '../../models/etapa_doacao.dart';
+import '../../widgets/page_title.dart';
 import '../../widgets/section_card.dart';
 import '../../widgets/status_badge.dart';
 import 'donation_detail_screen.dart';
@@ -14,15 +15,20 @@ class DonationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Minhas doacoes')),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        itemCount: doacoesMock.length,
-        separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
-        itemBuilder: (context, i) {
-          final doacao = doacoesMock[i];
-          return SectionCard(
+    return ListView.separated(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      itemCount: doacoesMock.length + 1,
+      separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
+      itemBuilder: (context, i) {
+        if (i == 0) {
+          return const PageTitle(
+            titulo: 'Minhas doacoes',
+            descricao: 'Acompanhe cada etapa das suas doacoes.',
+          );
+        }
+
+        final doacao = doacoesMock[i - 1];
+        return SectionCard(
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
@@ -78,9 +84,8 @@ class DonationsScreen extends StatelessWidget {
                 ),
               ],
             ),
-          );
-        },
-      ),
+        );
+      },
     );
   }
 }

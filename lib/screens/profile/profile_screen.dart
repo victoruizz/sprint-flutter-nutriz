@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../widgets/page_title.dart';
 import '../../data/mock_sessao.dart';
 import '../../data/mock_usuaria.dart';
 import '../../models/perfil.dart';
@@ -50,11 +51,10 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final d = _dados;
-    return Scaffold(
-      appBar: AppBar(title: const Text('Perfil')),
-      body: ListView(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        children: [
+    return ListView(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      children: [
+        const PageTitle(titulo: 'Perfil'),
           Row(
             children: [
               CircleAvatar(
@@ -110,8 +110,7 @@ class ProfileScreen extends StatelessWidget {
             icon: const Icon(Icons.logout),
             label: const Text('Sair'),
           ),
-        ],
-      ),
+      ],
     );
   }
 
