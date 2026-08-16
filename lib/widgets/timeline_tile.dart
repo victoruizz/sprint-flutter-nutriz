@@ -15,12 +15,14 @@ class TimelineTile extends StatelessWidget {
         StatusEtapa.concluida => AppColors.teal,
         StatusEtapa.emAndamento => AppColors.navy,
         StatusEtapa.pendente => AppColors.line,
+        StatusEtapa.erro => const Color(0xFFA32D2D),
       };
 
   IconData get _icone => switch (etapa.status) {
         StatusEtapa.concluida => Icons.check,
         StatusEtapa.emAndamento => Icons.autorenew,
         StatusEtapa.pendente => Icons.circle_outlined,
+        StatusEtapa.erro => Icons.priority_high,
       };
 
   @override

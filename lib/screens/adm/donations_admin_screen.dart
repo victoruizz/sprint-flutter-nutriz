@@ -10,7 +10,7 @@ import '../../data/mock_doacoes.dart';
 import '../../models/etapa_doacao.dart';
 import '../../widgets/section_card.dart';
 import '../../widgets/status_badge.dart';
-import '../donations/donation_detail_screen.dart';
+import 'donation_manage_screen.dart';
 
 class DonationsAdminScreen extends StatelessWidget {
   const DonationsAdminScreen({super.key});
@@ -36,10 +36,15 @@ class DonationsAdminScreen extends StatelessWidget {
           final doacao = doacoesMock[i];
           final doadora = _doadoras[i % _doadoras.length];
           return SectionCard(
+            // A administracao abre a tela de gestao, onde controla as etapas -
+            // a doadora ve apenas o acompanhamento.
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => DonationDetailScreen(doacao: doacao),
+                builder: (_) => DonationManageScreen(
+                  doacao: doacao,
+                  doadora: doadora,
+                ),
               ),
             ),
             child: Column(

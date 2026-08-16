@@ -26,6 +26,11 @@ class StatusBadge extends StatelessWidget {
           fg: AppColors.muted,
           bg: const Color(0xFFF1F3F5),
         ),
+      StatusEtapa.erro => (
+          label: 'Com erro',
+          fg: const Color(0xFFA32D2D),
+          bg: const Color(0xFFFCEBEB),
+        ),
     };
 
     return Container(
