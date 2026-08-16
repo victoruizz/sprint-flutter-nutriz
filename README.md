@@ -4,10 +4,13 @@ Aplicativo Android em **Flutter**, navegável e **100% mockado** (sem API, sem
 backend, sem banco de dados), que representa o produto **Nutriz** — plataforma de
 doação de leite humano em parceria com a Lactare/Eurofarma.
 
-- **Equipe:** <!-- PREENCHER: nome da equipe -->
-- **Integrantes:** <!-- PREENCHER: nomes e RMs dos integrantes -->
-- **Repositório:** https://github.com/victoruizz/sprint-flutter-nutriz
-- **Vídeo de navegação:** <!-- PREENCHER: link do vídeo (YouTube/Drive) -->
+| | |
+|---|---|
+| **Nome do projeto** | Nutriz — App Flutter |
+| **Nome da equipe** | <!-- PREENCHER: nome da equipe --> |
+| **Integrantes** | <!-- PREENCHER: nome completo e RM de cada integrante --> |
+| **Repositório GitHub** | https://github.com/victoruizz/sprint-flutter-nutriz |
+| **Vídeo de navegação** | <!-- PREENCHER: link do vídeo (YouTube/Drive) --> |
 
 ---
 
