@@ -8,9 +8,19 @@ doação de leite humano em parceria com a Lactare/Eurofarma.
 |---|---|
 | **Nome do projeto** | Nutriz — App Flutter |
 | **Nome da equipe** | Nutriz |
-| **Integrantes** | <!-- PREENCHER: nome completo e RM de cada integrante --> |
+| **Integrantes** | Ver tabela abaixo |
 | **Repositório GitHub** | https://github.com/victoruizz/sprint-flutter-nutriz |
 | **Vídeo de navegação** | <!-- PREENCHER: link do vídeo (YouTube/Drive) --> |
+
+### Integrantes
+
+| RM | Nome |
+|----|------|
+| 555000 | Carolina Barbosa Pacífico de Almeida |
+| 555051 | Jaime Luiz Trauzola Silva |
+| 558618 | Leonardo Mortari |
+| 557093 | Ricardo Henrique de Almeida Santos |
+| 559209 | Victor Ruiz Vieira |
 
 ---
 
