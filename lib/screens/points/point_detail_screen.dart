@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../models/ponto_coleta.dart';
+import '../../widgets/app_page.dart';
 import '../../widgets/info_row.dart';
 import '../../widgets/section_card.dart';
 
@@ -22,10 +23,10 @@ class PointDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Ponto de coleta')),
-      body: ListView(
-        padding: const EdgeInsets.all(AppSpacing.md),
+    return AppPage(
+      titulo: 'Ponto de coleta',
+      child: ListView(
+        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
         children: [
           Container(
             height: 140,

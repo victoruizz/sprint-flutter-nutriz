@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../widgets/app_page.dart';
 import '../../data/mock_dashboard.dart';
 import '../../data/mock_sessao.dart';
 import '../../widgets/section_card.dart';
@@ -14,10 +15,10 @@ class DashboardScreen extends StatelessWidget {
     final maxEtapa =
         doacoesPorEtapaMock.map((e) => e.total).reduce((a, b) => a > b ? a : b);
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('Painel')),
-      body: ListView(
-        padding: const EdgeInsets.all(AppSpacing.md),
+    return AppPage(
+      titulo: 'Painel',
+      child: ListView(
+        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
         children: [
           Text(
             'Ola, ${adminMock.primeiroNome}!',

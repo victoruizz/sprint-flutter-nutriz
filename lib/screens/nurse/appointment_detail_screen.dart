@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/date_format.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../widgets/app_page.dart';
 import '../../models/agendamento.dart';
 import '../../widgets/agendamento_status_chip.dart';
 import '../../widgets/info_row.dart';
@@ -24,10 +25,10 @@ class AppointmentDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Agendamento')),
-      body: ListView(
-        padding: const EdgeInsets.all(AppSpacing.md),
+    return AppPage(
+      titulo: 'Agendamento',
+      child: ListView(
+        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
         children: [
           Row(
             children: [

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../widgets/app_page.dart';
 import '../../data/mock_usuarios.dart';
 import '../../models/usuario_sistema.dart';
 import '../../widgets/section_card.dart';
@@ -12,10 +13,10 @@ class UsersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Usuarios')),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(AppSpacing.md),
+    return AppPage(
+      titulo: 'Usuarios',
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
         itemCount: usuariosMock.length,
         separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
         itemBuilder: (context, i) {

@@ -4,6 +4,7 @@ import '../../core/date_format.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../models/doacao.dart';
+import '../../widgets/app_page.dart';
 import '../../widgets/section_card.dart';
 import '../../widgets/timeline_tile.dart';
 
@@ -16,10 +17,10 @@ class DonationDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final etapas = doacao.etapas;
 
-    return Scaffold(
-      appBar: AppBar(title: Text(doacao.id)),
-      body: ListView(
-        padding: const EdgeInsets.all(AppSpacing.md),
+    return AppPage(
+      titulo: doacao.id,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
         children: [
           SectionCard(
             child: Column(

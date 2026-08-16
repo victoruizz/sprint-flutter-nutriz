@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../widgets/content_container.dart';
 import '../../widgets/nutriz_logo.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -14,8 +15,10 @@ class SplashScreen extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(gradient: AppColors.evaGradient),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.lg),
+          child: ContentContainer(
+            larguraMaxima: 520,
+            espacoAcima: AppSpacing.lg,
+            espacoAbaixo: AppSpacing.lg,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [

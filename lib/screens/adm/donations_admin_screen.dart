@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/date_format.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../widgets/app_page.dart';
 import '../../data/mock_doacoes.dart';
 import '../../models/etapa_doacao.dart';
 import '../../widgets/section_card.dart';
@@ -20,10 +21,10 @@ class DonationsAdminScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Gestao de doacoes')),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(AppSpacing.md),
+    return AppPage(
+      titulo: 'Gestao de doacoes',
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
         itemCount: doacoesMock.length,
         separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
         itemBuilder: (context, i) {

@@ -5,6 +5,7 @@ import '../../core/theme/app_spacing.dart';
 import '../../data/mock_eva.dart';
 import '../../models/mensagem_eva.dart';
 import '../../widgets/chat_bubble.dart';
+import '../../widgets/content_container.dart';
 import '../../widgets/suggestion_chip.dart';
 
 class EvaChatScreen extends StatefulWidget {
@@ -77,8 +78,19 @@ class _EvaChatScreenState extends State<EvaChatScreen> {
   Widget build(BuildContext context) {
     final mostrarSugestoes = _mensagens.length <= 1 && !_digitando;
     return Scaffold(
-      appBar: AppBar(title: const Text('EVA')),
-      body: Column(
+      backgroundColor: AppColors.appBg,
+      appBar: AppBar(
+        backgroundColor: AppColors.navy,
+        foregroundColor: AppColors.white,
+        surfaceTintColor: AppColors.navy,
+        elevation: 0,
+        title: const Text('EVA'),
+      ),
+      // Mesma coluna centralizada das demais telas - a conversa nao encosta
+      // nas bordas da janela.
+      body: ContentContainer(
+        larguraMaxima: 800,
+        child: Column(
         children: [
           Container(
             width: double.infinity,
@@ -122,6 +134,7 @@ class _EvaChatScreenState extends State<EvaChatScreen> {
             ),
           _barraEntrada(),
         ],
+        ),
       ),
     );
   }
