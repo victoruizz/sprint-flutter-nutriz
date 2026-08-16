@@ -43,7 +43,7 @@ class _HomeShellState extends State<HomeShell> {
     ];
 
     return Scaffold(
-      backgroundColor: AppColors.surface,
+      backgroundColor: AppColors.appBg,
       appBar: const AppHeader(),
       endDrawer: AppDrawer(
         abaAtual: _index,

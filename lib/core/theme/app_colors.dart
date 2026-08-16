@@ -26,6 +26,9 @@ class AppColors {
   static const Color slate = Color(0xFF64748B);
   static const Color slateLight = Color(0xFF94A3B8);
   static const Color canvas = Color(0xFFF5F7FB);
+
+  /// Fundo do app autenticado (Layout.tsx do web-nutriz).
+  static const Color appBg = Color(0xFFF7F7FA);
   static const Color hairline = Color(0xFFE6ECF5);
 
   static const Color ink = Color(0xFF1F2937);
