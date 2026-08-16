@@ -153,7 +153,8 @@ class _CardDepoimento extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              Column(
+              Expanded(
+                child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -170,6 +171,7 @@ class _CardDepoimento extends StatelessWidget {
                         fontSize: 12.5, color: AppColors.slate),
                   ),
                 ],
+                ),
               ),
             ],
           ),

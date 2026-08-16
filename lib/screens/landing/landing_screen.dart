@@ -142,14 +142,24 @@ class _LandingScreenState extends State<LandingScreen> {
               builder: (context, constraints) {
                 // No site a navegacao completa aparece a partir de lg e o
                 // botao de menu fica escondido (`lg:hidden`).
-                final navCompleta = constraints.maxWidth >= 940;
+                final navCompleta = constraints.maxWidth >= 1100;
 
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const NutrizLogo(altura: 24),
                     if (navCompleta) ...[
-                      _navSecoes(),
+                      // A pilula rola na horizontal se faltar espaco, para
+                      // nunca estourar a linha e sumir com o header.
+                      Flexible(
+                        child: Center(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: _navSecoes(),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
                       _acoesEntrada(context),
                     ] else
                       _botaoMenu(),
@@ -275,7 +285,7 @@ class _LinkSecaoState extends State<_LinkSecao> {
         onTap: widget.onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
             color: _sobre
                 ? AppColors.white.withValues(alpha: 0.15)

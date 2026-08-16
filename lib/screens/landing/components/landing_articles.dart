@@ -50,12 +50,14 @@ class LandingArticles extends StatelessWidget {
               children: [
                 Icon(Icons.verified, size: 16, color: Color(0xFF12A35F)),
                 SizedBox(width: 6),
-                Text(
-                  'Conteudo validado por rBLH e Fiocruz',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF12A35F),
+                Flexible(
+                  child: Text(
+                    'Conteudo validado por rBLH e Fiocruz',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF12A35F),
+                    ),
                   ),
                 ),
               ],
@@ -157,12 +159,16 @@ class _CardArtigo extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        artigo.tempoLeitura,
-                        style: const TextStyle(
-                            fontSize: 12, color: AppColors.slateLight),
+                      Flexible(
+                        child: Text(
+                          artigo.tempoLeitura,
+                          style: const TextStyle(
+                              fontSize: 12, color: AppColors.slateLight),
+                        ),
                       ),
+                      const SizedBox(width: 8),
                       Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
                             'Ler artigo',

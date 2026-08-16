@@ -92,13 +92,15 @@ class LandingEva extends StatelessWidget {
                     children: [
                       _Ponto(cor: Color(0xFF2EA36A)),
                       SizedBox(width: 8),
-                      Text(
-                        'ASSISTENTE 24 HORAS',
-                        style: TextStyle(
-                          fontSize: 12.5,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1.4,
-                          color: Color(0xFFA52D5E),
+                      Flexible(
+                        child: Text(
+                          'ASSISTENTE 24 HORAS',
+                          style: TextStyle(
+                            fontSize: 12.5,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 1.4,
+                            color: Color(0xFFA52D5E),
+                          ),
                         ),
                       ),
                     ],

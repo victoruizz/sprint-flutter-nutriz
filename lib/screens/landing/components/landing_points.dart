@@ -76,11 +76,12 @@ class _LandingPointsState extends State<LandingPoints> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                Row(
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
                   children: [
                     _chipFiltro('Todos', !_somenteDomiciliar,
                         () => setState(() => _somenteDomiciliar = false)),
-                    const SizedBox(width: 8),
                     _chipFiltro('Coleta Domiciliar', _somenteDomiciliar,
                         () => setState(() => _somenteDomiciliar = true)),
                   ],
@@ -170,17 +171,17 @@ class _CardPonto extends StatelessWidget {
             style: const TextStyle(fontSize: 13, color: AppColors.slate),
           ),
           const SizedBox(height: 10),
-          Row(
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
             children: [
               _tag(
                 ponto.aberto ? 'Aberto agora' : 'Fechado',
                 ponto.aberto ? const Color(0xFF0F766E) : AppColors.muted,
                 ponto.aberto ? const Color(0xFFD5F3EA) : AppColors.line,
               ),
-              if (ponto.coletaDomiciliar) ...[
-                const SizedBox(width: 8),
+              if (ponto.coletaDomiciliar)
                 _tag('Coleta domiciliar', AppColors.navy, AppColors.blueSoft),
-              ],
             ],
           ),
         ],
