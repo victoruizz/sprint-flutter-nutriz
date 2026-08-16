@@ -425,9 +425,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _rodapeFormulario() {
     return Container(
       color: WizardStepperCores.rodapeCard,
-      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      // Wrap para os botoes quebrarem a linha em telas estreitas em vez de
+      // estourar o rodape.
+      child: Wrap(
+        alignment: WrapAlignment.spaceBetween,
+        spacing: 12,
+        runSpacing: 12,
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           if (_etapa == 0)
             TextButton(

@@ -105,8 +105,10 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
       (StatusAgendamento.naoRealizada, 'Com Erro'),
     ];
 
-    return Align(
-      alignment: Alignment.centerLeft,
+    // `overflow-x-auto` do site: em tela estreita as abas rolam na horizontal
+    // em vez de estourar a linha.
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
       child: Container(
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(

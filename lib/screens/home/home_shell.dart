@@ -15,14 +15,18 @@ import 'home_screen.dart';
 /// com wordmark centralizada e menu lateral direito (AppDrawer) - a navegacao
 /// entre areas acontece pelo menu, nao por barra inferior.
 class HomeShell extends StatefulWidget {
-  const HomeShell({super.key});
+  /// Aba aberta ao entrar. Permite que cada area da doadora tenha a propria
+  /// rota (/minhas-doacoes, /pontos-de-coleta...), como no roteador do site.
+  final int abaInicial;
+
+  const HomeShell({super.key, this.abaInicial = 0});
 
   @override
   State<HomeShell> createState() => _HomeShellState();
 }
 
 class _HomeShellState extends State<HomeShell> {
-  int _index = 0;
+  late int _index = widget.abaInicial;
 
   void _irParaAba(int i) => setState(() => _index = i);
 

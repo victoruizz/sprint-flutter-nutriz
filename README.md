@@ -7,7 +7,7 @@ doação de leite humano em parceria com a Lactare/Eurofarma.
 | | |
 |---|---|
 | **Nome do projeto** | Nutriz — App Flutter |
-| **Nome da equipe** | <!-- PREENCHER: nome da equipe --> |
+| **Nome da equipe** | Nutriz |
 | **Integrantes** | <!-- PREENCHER: nome completo e RM de cada integrante --> |
 | **Repositório GitHub** | https://github.com/victoruizz/sprint-flutter-nutriz |
 | **Vídeo de navegação** | <!-- PREENCHER: link do vídeo (YouTube/Drive) --> |
@@ -130,27 +130,88 @@ nomes exibidos dentro do app batem com o login usado.
 
 ## Prints das telas
 
-<!-- PREENCHER: substituir os placeholders por prints do APP RODANDO no
-     emulador/dispositivo. Prints de Figma/protótipo NÃO valem. Sugestão: salvar
-     os PNGs em `docs/prints/` e referenciar com Markdown, por exemplo:
-     ![Início](docs/prints/inicio.png) -->
+Capturas do **aplicativo em execução** (`flutter run`), na largura de um
+celular. Os arquivos estão em `docs/prints/`.
 
-| Tela | O que mostrar | Print |
-|------|---------------|-------|
-| Splash / Landing | Hero, métricas e header com os links das seções | <!-- PREENCHER --> |
-| Login | Card centralizado e seletor de perfil | <!-- PREENCHER --> |
-| Cadastro | Assistente de 4 etapas + tela de conta criada | <!-- PREENCHER --> |
-| Início da doadora | Bloco navy, próxima etapa e Seu Impacto | <!-- PREENCHER --> |
-| Menu lateral | Aberto, com avatar e itens do perfil | <!-- PREENCHER --> |
-| Detalhe da doação | Linha do tempo com as etapas | <!-- PREENCHER --> |
-| Pontos de coleta | Lista com distância e status | <!-- PREENCHER --> |
-| Conteúdo / artigo | Destaque, grade e detalhe do artigo | <!-- PREENCHER --> |
-| EVA | Painel flutuante aberto sobre a tela | <!-- PREENCHER --> |
-| Nova doação | "O que vai acontecer" e botão Confirmar | <!-- PREENCHER --> |
-| Painel do administrador | Gráfico de litros e cards de indicadores | <!-- PREENCHER --> |
-| Gestão da doação | Etapa liberada com agendar / finalizar / erro | <!-- PREENCHER --> |
-| Usuários | Tabela com filtro por perfil | <!-- PREENCHER --> |
-| Agendamentos (enfermagem) | Abas de status e cards | <!-- PREENCHER --> |
+### 1. Splash
+
+Tela de apresentação com a marca, a frase do produto e o botão "Começar".
+
+![Splash](docs/prints/01-splash.png)
+
+### 2. Landing page
+
+Página pública: hero "Doar Amor. / Multiplica Vidas.", faixa de métricas
+(4.200+ doadoras, 12 mil L, 98%), "Três passos para salvar uma vida", pontos de
+coleta, bloco da EVA, artigos, depoimentos e rodapé.
+
+![Landing page](docs/prints/02-landing.png)
+
+### 3. Login
+
+Card centralizado com validação de e-mail e senha, mostrar/ocultar senha e o
+seletor de perfil (Doadora, Admin, Enfermagem) que define a área aberta.
+
+![Login](docs/prints/03-login.png)
+
+### 4. Cadastro
+
+Assistente de quatro etapas — Dados pessoais, Endereço, Senha e Bebê/termos —
+com indicador de progresso e rodapé de navegação.
+
+![Cadastro](docs/prints/04-cadastro.png)
+
+### 5. Início da doadora
+
+Saudação personalizada, botões "Nova Doação" e "Falar com a EVA", cartão da
+próxima etapa com progresso, painel "Seu Impacto" (doações, leite doado, bebês
+alimentados), acompanhamento da doação e rede de apoio. No canto, o botão
+flutuante da EVA.
+
+![Início da doadora](docs/prints/05-home.png)
+
+### 6. Minhas doações
+
+Lista das doações com identificador, status, data de início, etapa atual e
+barra de progresso. Tocar num card abre o detalhe daquela doação.
+
+![Minhas doações](docs/prints/06-minhas-doacoes.png)
+
+### 7. Pontos de coleta
+
+Bancos de leite e postos com endereço, distância, situação (aberto/fechado) e
+indicação de coleta domiciliar.
+
+![Pontos de coleta](docs/prints/07-pontos-de-coleta.png)
+
+### 8. Conteúdo educativo
+
+Artigo em destaque com capa e a grade com os demais, cada um com categoria,
+resumo e tempo de leitura. Tocar num card abre aquele artigo.
+
+![Conteúdo educativo](docs/prints/08-conteudo-educativo.png)
+
+### 9. Perfil
+
+Identificação do usuário e as abas "Meus dados" e "Meu bebê", com os campos
+editáveis e a barra de ações que aparece quando há alterações.
+
+![Perfil](docs/prints/09-perfil.png)
+
+### 10. Painel da administração
+
+Indicadores consolidados: filtro de período, litros captados por mês em barras,
+doações ativas por etapa, nível de satisfação, taxa de recorrência, tempo médio
+de resposta e doações com erro.
+
+![Painel da administração](docs/prints/10-painel-adm.png)
+
+### 11. Agendamentos (enfermagem)
+
+Agendamentos atribuídos, com abas de status (Em Andamento, Concluído, Com Erro)
+e cards com doadora, data, local e etapa da doação.
+
+![Agendamentos](docs/prints/11-agendamentos.png)
 
 ---
 

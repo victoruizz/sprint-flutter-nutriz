@@ -23,39 +23,49 @@ class WizardStepper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (var i = 0; i < etapas.length; i++) ...[
-          if (i > 0)
-            Expanded(
-              child: Container(
-                height: 2,
-                margin: const EdgeInsets.symmetric(horizontal: 8),
-                decoration: BoxDecoration(
-                  color: i <= atual ? azul : linhaInativa,
-                  borderRadius: BorderRadius.circular(999),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Como no site (`hidden sm:block`), os rotulos so aparecem quando ha
+        // espaco - em tela estreita ficam so os numeros.
+        final mostrarRotulos = constraints.maxWidth >= 520;
+
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (var i = 0; i < etapas.length; i++) ...[
+              if (i > 0)
+                Expanded(
+                  child: Container(
+                    height: 2,
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    decoration: BoxDecoration(
+                      color: i <= atual ? azul : linhaInativa,
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    transform: Matrix4.translationValues(0, 16, 0),
+                  ),
                 ),
-                transform: Matrix4.translationValues(0, 16, 0),
+              _Etapa(
+                indice: i,
+                rotulo: mostrarRotulos ? etapas[i] : null,
+                concluida: i < atual,
+                ativa: i == atual,
+                visitada: i <= maxVisitada,
+                onTap: () => onEtapaTocada(i),
               ),
-            ),
-          _Etapa(
-            indice: i,
-            rotulo: etapas[i],
-            concluida: i < atual,
-            ativa: i == atual,
-            visitada: i <= maxVisitada,
-            onTap: () => onEtapaTocada(i),
-          ),
-        ],
-      ],
+            ],
+          ],
+        );
+      },
     );
   }
 }
 
 class _Etapa extends StatelessWidget {
   final int indice;
-  final String rotulo;
+
+  /// Nulo em telas estreitas, onde so o numero da etapa aparece.
+  final String? rotulo;
   final bool concluida;
   final bool ativa;
   final bool visitada;
@@ -110,22 +120,24 @@ class _Etapa extends StatelessWidget {
                     ),
                   ),
           ),
-          const SizedBox(height: 6),
-          Text(
-            rotulo,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: ativa ? FontWeight.w600 : FontWeight.w400,
-              color: ativa
-                  ? WizardStepper.azul
-                  : concluida
-                      ? const Color(0xFF09090B)
-                      : visitada
-                          ? WizardStepper.azul.withValues(alpha: 0.7)
-                          : WizardStepper.textoInativo,
+          if (rotulo != null) ...[
+            const SizedBox(height: 6),
+            Text(
+              rotulo!,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: ativa ? FontWeight.w600 : FontWeight.w400,
+                color: ativa
+                    ? WizardStepper.azul
+                    : concluida
+                        ? const Color(0xFF09090B)
+                        : visitada
+                            ? WizardStepper.azul.withValues(alpha: 0.7)
+                            : WizardStepper.textoInativo,
+              ),
             ),
-          ),
+          ],
         ],
       ),
     );

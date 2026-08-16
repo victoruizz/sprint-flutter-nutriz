@@ -121,10 +121,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ],
           ),
           const SizedBox(height: 20),
-          Row(
+          Wrap(
+            spacing: 16,
+            runSpacing: 8,
             children: [
               _legenda(AppColors.navy, 'Mes vigente'),
-              const SizedBox(width: 16),
               _legenda(const Color(0xFFBFE0F5), 'Meses anteriores'),
             ],
           ),
@@ -348,13 +349,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
           const SizedBox(height: 8),
           Container(height: 1, color: const Color(0xFFE5E7EB)),
           const SizedBox(height: 12),
-          Row(
+          Wrap(
+            spacing: 28,
+            runSpacing: 12,
             children: [
               _resumo('Avaliacoes no periodo', '$total', _tinta),
-              const SizedBox(width: 28),
               _resumo(
                   'Nota Media', media.toStringAsFixed(1), AppColors.pink),
-              const SizedBox(width: 28),
               _resumo('4 ou 5 Estrelas', '$pctPositivas%', _tinta),
             ],
           ),

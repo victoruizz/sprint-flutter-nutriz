@@ -61,31 +61,41 @@ class PointsScreen extends StatelessWidget {
                       color: AppColors.muted, fontSize: 13, height: 1.3),
                 ),
                 const SizedBox(height: AppSpacing.sm),
-                Row(
+                Wrap(
+                  spacing: AppSpacing.md,
+                  runSpacing: 6,
                   children: [
-                    const Icon(Icons.near_me_outlined,
-                        size: 16, color: AppColors.blue),
-                    const SizedBox(width: 4),
-                    Text(
-                      '${ponto.distanciaKm.toStringAsFixed(1)} km',
-                      style: const TextStyle(
-                          color: AppColors.ink,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.near_me_outlined,
+                            size: 16, color: AppColors.blue),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${ponto.distanciaKm.toStringAsFixed(1)} km',
+                          style: const TextStyle(
+                              color: AppColors.ink,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
                     ),
-                    if (ponto.coletaDomiciliar) ...[
-                      const SizedBox(width: AppSpacing.md),
-                      const Icon(Icons.home_outlined,
+                    if (ponto.coletaDomiciliar)
+                      const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                      Icon(Icons.home_outlined,
                           size: 16, color: AppColors.teal),
-                      const SizedBox(width: 4),
-                      const Text(
+                      SizedBox(width: 4),
+                      Text(
                         'Coleta domiciliar',
                         style: TextStyle(
                             color: AppColors.teal,
                             fontSize: 13,
                             fontWeight: FontWeight.w600),
                       ),
-                    ],
+                        ],
+                      ),
                   ],
                 ),
               ],
