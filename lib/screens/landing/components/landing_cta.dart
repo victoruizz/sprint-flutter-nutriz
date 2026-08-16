@@ -38,15 +38,50 @@ class LandingCta extends StatelessWidget {
             color: AppColors.heroNavy,
             borderRadius: BorderRadius.circular(26),
           ),
-          child: Column(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              // `lg:flex-row lg:items-center lg:justify-between`: chamada a
+              // esquerda, botoes e prova social a direita.
+              final ladoALado = constraints.maxWidth >= 860;
+
+              if (ladoALado) {
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(child: _chamada()),
+                    const SizedBox(width: 48),
+                    _acoes(context, alinharADireita: true),
+                  ],
+                );
+              }
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _chamada(),
+                  const SizedBox(height: 28),
+                  _acoes(context, alinharADireita: false),
+                ],
+              );
+            },
+          ),
+        ),
+        ),
+      ),
+    );
+  }
+
+  Widget _chamada() {
+    return const Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ActivityBadge(
+              ActivityBadge(
                 rotulo: 'Junte-se a nos',
                 corPonto: AppColors.cyan,
               ),
-              const SizedBox(height: 20),
-              const Text(
+              SizedBox(height: 20),
+              Text(
                 'Pronta para fazer a diferenca?',
                 style: TextStyle(
                   fontSize: 28,
@@ -56,8 +91,8 @@ class LandingCta extends StatelessWidget {
                   letterSpacing: -0.5,
                 ),
               ),
-              const SizedBox(height: 12),
-              const Text(
+              SizedBox(height: 12),
+              Text(
                 'Cadastre-se agora e comece sua jornada de doacao.',
                 style: TextStyle(
                   fontSize: 15,
@@ -65,51 +100,67 @@ class LandingCta extends StatelessWidget {
                   height: 1.55,
                 ),
               ),
-              const SizedBox(height: 28),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.white,
-                    foregroundColor: AppColors.heroNavy,
-                    minimumSize: const Size(0, 48),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(999),
+      ],
+    );
+  }
+
+  Widget _acoes(BuildContext context, {required bool alinharADireita}) {
+    return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: alinharADireita
+                ? CrossAxisAlignment.end
+                : CrossAxisAlignment.start,
+            children: [
+              // `flex-col sm:flex-row`: os dois botoes ficam um ao lado do
+              // outro assim que ha espaco.
+              Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                alignment:
+                    alinharADireita ? WrapAlignment.end : WrapAlignment.start,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.white,
+                      foregroundColor: AppColors.heroNavy,
+                      minimumSize: const Size(0, 48),
+                      padding: const EdgeInsets.symmetric(horizontal: 26),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                    ),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.register),
+                    child: const Text(
+                      'Quero ser doadora',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                     ),
                   ),
-                  onPressed: () =>
-                      Navigator.pushNamed(context, AppRoutes.register),
-                  child: const Text(
-                    'Quero ser doadora',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.white,
-                    minimumSize: const Size(0, 48),
-                    side: BorderSide(
-                        color: AppColors.white.withValues(alpha: 0.4)),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(999),
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.white,
+                      minimumSize: const Size(0, 48),
+                      padding: const EdgeInsets.symmetric(horizontal: 26),
+                      side: BorderSide(
+                          color: AppColors.white.withValues(alpha: 0.4)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                    ),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.login),
+                    child: const Text(
+                      'Ja sou doadora - fazer login',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                     ),
                   ),
-                  onPressed: () =>
-                      Navigator.pushNamed(context, AppRoutes.login),
-                  child: const Text(
-                    'Ja sou doadora - fazer login',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
-                  ),
-                ),
+                ],
               ),
               const SizedBox(height: 24),
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
                     width: 24.0 * avatarsCta.length + 8,
@@ -134,7 +185,7 @@ class LandingCta extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  const Expanded(
+                  const Flexible(
                     child: Text.rich(
                       TextSpan(
                         style: TextStyle(
@@ -155,10 +206,6 @@ class LandingCta extends StatelessWidget {
                 ],
               ),
             ],
-          ),
-        ),
-        ),
-      ),
     );
   }
 }

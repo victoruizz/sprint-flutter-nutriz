@@ -39,7 +39,45 @@ class LandingEva extends StatelessWidget {
               gradient: evaLandingGradient,
               borderRadius: BorderRadius.circular(28),
             ),
-            child: Column(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                // `lg:flex-row lg:items-center lg:justify-between`: texto e
+                // botao a esquerda, card da conversa a direita.
+                final ladoALado = constraints.maxWidth >= 860;
+
+                if (ladoALado) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(child: _textoEva()),
+                      const SizedBox(width: 48),
+                      SizedBox(width: 380, child: _previaConversa()),
+                    ],
+                  );
+                }
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _textoEva(),
+                    const SizedBox(height: 28),
+                    _previaConversa(),
+                  ],
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 28),
+          _comecePorAqui(),
+        ],
+        ),
+      ),
+    );
+  }
+
+  Widget _textoEva() {
+    return Column(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
@@ -105,52 +143,49 @@ class LandingEva extends StatelessWidget {
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                   ),
                 ),
-                const SizedBox(height: 28),
-                _previaConversa(),
-              ],
-            ),
+      ],
+    );
+  }
+
+  /// `flex-col gap-3 lg:flex-row lg:flex-wrap lg:items-center`: o rotulo e os
+  /// chips ficam na mesma linha, um ao lado do outro.
+  Widget _comecePorAqui() {
+    return Wrap(
+      spacing: 12,
+      runSpacing: 12,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        const Text(
+          'Comece por aqui:',
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w700,
+            color: Color(0xFF1C1B1F),
           ),
-          const SizedBox(height: 28),
-          const Text(
-            'Comece por aqui:',
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-              color: Color(0xFF1C1B1F),
-            ),
-          ),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: sugestoesEva
-                .map(
-                  (s) => GestureDetector(
-                    onTap: () => onAbrirEva(s),
-                    child: Container(
-                      constraints: const BoxConstraints(minHeight: 44),
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(horizontal: 18),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFFCE7EF),
-                        borderRadius: BorderRadius.circular(999),
-                      ),
-                      child: Text(
-                        s,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFFB8386A),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
-        ],
         ),
-      ),
+        ...sugestoesEva.map(
+          (s) => GestureDetector(
+            onTap: () => onAbrirEva(s),
+            child: Container(
+              constraints: const BoxConstraints(minHeight: 44),
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFCE7EF),
+                borderRadius: BorderRadius.circular(999),
+              ),
+              child: Text(
+                s,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFFB8386A),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
