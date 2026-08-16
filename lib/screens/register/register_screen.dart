@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../core/routes.dart';
 import '../../core/theme/app_colors.dart';
-import '../../core/theme/app_spacing.dart';
+import '../../widgets/nutriz_logo.dart';
+import 'components/wizard_field.dart';
+import 'components/wizard_stepper.dart';
 
+/// Cadastro da nutriz no mesmo formato do web-nutriz
+/// (pages/public/register): assistente de quatro etapas com indicador de
+/// progresso, cartao branco com o formulario e rodape com Voltar/Continuar.
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -12,199 +17,117 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _nome = TextEditingController();
-  final _email = TextEditingController();
-  final _telefone = TextEditingController();
-  final _cidade = TextEditingController();
-  final _bairro = TextEditingController();
-  final _bebe = TextEditingController();
+  static const List<String> _etapas = [
+    'Dados pessoais',
+    'Endereco',
+    'Senha',
+    'Bebe e termos',
+  ];
 
+  final _chavesFormulario =
+      List.generate(4, (_) => GlobalKey<FormState>());
+
+  // Dados pessoais
+  final _nome = TextEditingController();
+  final _cpf = TextEditingController();
+  final _nascimento = TextEditingController();
+  final _telefone = TextEditingController();
+  final _email = TextEditingController();
+
+  // Endereco
+  final _cep = TextEditingController();
+  final _numero = TextEditingController();
+  final _complemento = TextEditingController();
+
+  // Senha
+  final _senha = TextEditingController();
+  final _confirmaSenha = TextEditingController();
+
+  // Bebe
+  final _nomeBebe = TextEditingController();
+  final _nascimentoBebe = TextEditingController();
+
+  int _etapa = 0;
+  int _maxVisitada = 0;
   bool _temBebe = false;
   bool _aceitouTermos = false;
-  bool _carregando = false;
-  bool _enviado = false;
+  bool _enviando = false;
+  bool _sucesso = false;
 
   @override
   void dispose() {
-    _nome.dispose();
-    _email.dispose();
-    _telefone.dispose();
-    _cidade.dispose();
-    _bairro.dispose();
-    _bebe.dispose();
+    for (final c in [
+      _nome,
+      _cpf,
+      _nascimento,
+      _telefone,
+      _email,
+      _cep,
+      _numero,
+      _complemento,
+      _senha,
+      _confirmaSenha,
+      _nomeBebe,
+      _nascimentoBebe,
+    ]) {
+      c.dispose();
+    }
     super.dispose();
   }
 
-  String? _obrigatorio(String? v) =>
-      (v ?? '').trim().isEmpty ? 'Campo obrigatorio' : null;
+  bool get _ultimaEtapa => _etapa == _etapas.length - 1;
 
-  Future<void> _enviar() async {
-    if (!_formKey.currentState!.validate()) return;
+  void _irParaEtapa(int destino) {
+    setState(() {
+      _etapa = destino;
+      _maxVisitada = _maxVisitada > destino ? _maxVisitada : destino;
+    });
+  }
+
+  Future<void> _continuar() async {
+    if (!_chavesFormulario[_etapa].currentState!.validate()) return;
+
+    if (!_ultimaEtapa) {
+      _irParaEtapa(_etapa + 1);
+      return;
+    }
+
     if (!_aceitouTermos) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('E preciso aceitar os termos para continuar.'),
-          backgroundColor: AppColors.pink,
+          content: Text('E preciso aceitar os termos para criar a conta.'),
         ),
       );
       return;
     }
-    setState(() => _carregando = true);
-    await Future.delayed(const Duration(milliseconds: 1000));
+
+    setState(() => _enviando = true);
+    await Future.delayed(const Duration(milliseconds: 900));
     if (!mounted) return;
     setState(() {
-      _carregando = false;
-      _enviado = true;
+      _enviando = false;
+      _sucesso = true;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Criar conta')),
-      body: _enviado ? _sucesso() : _formulario(),
-    );
-  }
-
-  Widget _formulario() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _titulo('Dados pessoais'),
-            TextFormField(
-              controller: _nome,
-              textCapitalization: TextCapitalization.words,
-              decoration: const InputDecoration(labelText: 'Nome completo'),
-              validator: _obrigatorio,
-            ),
-            const SizedBox(height: AppSpacing.md),
-            TextFormField(
-              controller: _email,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(labelText: 'E-mail'),
-              validator: (v) {
-                final t = (v ?? '').trim();
-                if (t.isEmpty) return 'Campo obrigatorio';
-                if (!t.contains('@') || !t.contains('.')) {
-                  return 'E-mail invalido';
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: AppSpacing.md),
-            TextFormField(
-              controller: _telefone,
-              keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(labelText: 'Telefone'),
-              validator: _obrigatorio,
-            ),
-            const SizedBox(height: AppSpacing.lg),
-            _titulo('Endereco'),
-            TextFormField(
-              controller: _cidade,
-              decoration: const InputDecoration(labelText: 'Cidade'),
-              validator: _obrigatorio,
-            ),
-            const SizedBox(height: AppSpacing.md),
-            TextFormField(
-              controller: _bairro,
-              decoration: const InputDecoration(labelText: 'Bairro'),
-              validator: _obrigatorio,
-            ),
-            const SizedBox(height: AppSpacing.lg),
-            _titulo('Bebe (opcional)'),
-            SwitchListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text('Tenho um bebe para cadastrar'),
-              value: _temBebe,
-              onChanged: (v) => setState(() => _temBebe = v),
-            ),
-            if (_temBebe)
-              TextFormField(
-                controller: _bebe,
-                textCapitalization: TextCapitalization.words,
-                decoration: const InputDecoration(labelText: 'Nome do bebe'),
-                validator: (v) => _temBebe ? _obrigatorio(v) : null,
-              ),
-            const SizedBox(height: AppSpacing.lg),
-            CheckboxListTile(
-              contentPadding: EdgeInsets.zero,
-              controlAffinity: ListTileControlAffinity.leading,
-              title: const Text(
-                'Li e aceito os Termos de Uso e a Politica de Privacidade.',
-                style: TextStyle(fontSize: 13.5),
-              ),
-              value: _aceitouTermos,
-              onChanged: (v) => setState(() => _aceitouTermos = v ?? false),
-            ),
-            const SizedBox(height: AppSpacing.md),
-            ElevatedButton(
-              onPressed: _carregando ? null : _enviar,
-              child: _carregando
-                  ? const SizedBox(
-                      height: 22,
-                      width: 22,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: AppColors.white,
-                      ),
-                    )
-                  : const Text('Criar conta'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _sucesso() {
-    final nome = _nome.text.trim().split(' ').first;
-    return Padding(
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: WizardStepperCores.fundo,
+      body: Column(
         children: [
-          Container(
-            width: 96,
-            height: 96,
-            decoration: const BoxDecoration(
-              color: AppColors.tealSoft,
-              shape: BoxShape.circle,
-            ),
-            child:
-                const Icon(Icons.check_circle, color: AppColors.teal, size: 64),
-          ),
-          const SizedBox(height: AppSpacing.lg),
-          Text(
-            'Cadastro concluido${nome.isEmpty ? '' : ', $nome'}!',
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w800,
-              color: AppColors.ink,
-            ),
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          const Text(
-            'Sua conta de doadora foi criada. A equipe Lactare vai te acompanhar em cada etapa da doacao.',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.muted, height: 1.4),
-          ),
-          const SizedBox(height: AppSpacing.xl),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                context,
-                AppRoutes.home,
-                (route) => false,
+          _cabecalho(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 640),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 32, 16, 48),
+                    child: _sucesso ? _cartaoSucesso() : _formulario(),
+                  ),
+                ),
               ),
-              child: const Text('Comecar a usar'),
             ),
           ),
         ],
@@ -212,15 +135,462 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _titulo(String texto) => Padding(
-        padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-        child: Text(
-          texto,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: AppColors.navy,
+  Widget _cabecalho() {
+    return Container(
+      width: double.infinity,
+      color: AppColors.navy,
+      child: const SafeArea(
+        bottom: false,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 20),
+          child: Center(child: NutrizLogo(altura: 40)),
+        ),
+      ),
+    );
+  }
+
+  Widget _formulario() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextButton.icon(
+          onPressed: () => Navigator.pop(context),
+          style: TextButton.styleFrom(
+            foregroundColor: AppColors.navy,
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+          ),
+          icon: const Icon(Icons.chevron_left, size: 18),
+          label: const Text(
+            'Voltar',
+            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
           ),
         ),
-      );
+        const SizedBox(height: 12),
+        const Text(
+          'Criacao de usuario',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w800,
+            color: Color(0xFF0E2A45),
+          ),
+        ),
+        const SizedBox(height: 6),
+        const Text(
+          'Preencha seus dados para comecar a doar. Leva menos de 2 minutos.',
+          style: TextStyle(fontSize: 13.5, color: WizardStepperCores.textoSuave),
+        ),
+        const SizedBox(height: 24),
+        WizardStepper(
+          etapas: _etapas,
+          atual: _etapa,
+          maxVisitada: _maxVisitada,
+          onEtapaTocada: (i) {
+            if (i <= _etapa) {
+              _irParaEtapa(i);
+            } else if (_chavesFormulario[_etapa].currentState!.validate()) {
+              _irParaEtapa(i);
+            }
+          },
+        ),
+        const SizedBox(height: 24),
+        Container(
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: WizardStepperCores.borda),
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: Form(
+            key: _chavesFormulario[_etapa],
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(28),
+                  child: _conteudoEtapa(),
+                ),
+                _rodapeFormulario(),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _conteudoEtapa() {
+    switch (_etapa) {
+      case 0:
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            WizardField(
+              rotulo: 'Nome completo',
+              dica: 'Digite seu nome completo',
+              controlador: _nome,
+              validador: _obrigatorio,
+            ),
+            WizardField(
+              rotulo: 'CPF',
+              dica: '000.000.000-00',
+              controlador: _cpf,
+              tipoTeclado: TextInputType.number,
+              validador: _obrigatorio,
+            ),
+            WizardField(
+              rotulo: 'Data de nascimento',
+              dica: 'DD/MM/AAAA',
+              controlador: _nascimento,
+              tipoTeclado: TextInputType.datetime,
+              validador: _obrigatorio,
+            ),
+            WizardField(
+              rotulo: 'Telefone',
+              dica: '(11) 98765-4321',
+              controlador: _telefone,
+              tipoTeclado: TextInputType.phone,
+              validador: _obrigatorio,
+            ),
+            WizardField(
+              rotulo: 'Email',
+              dica: 'voce@email.com',
+              controlador: _email,
+              tipoTeclado: TextInputType.emailAddress,
+              validador: (v) {
+                final t = (v ?? '').trim();
+                if (t.isEmpty) return 'Email e obrigatorio.';
+                if (!RegExp(r'\S+@\S+\.\S+').hasMatch(t)) {
+                  return 'Informe um email valido.';
+                }
+                return null;
+              },
+            ),
+          ],
+        );
+      case 1:
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            WizardField(
+              rotulo: 'CEP',
+              dica: '00000-000',
+              controlador: _cep,
+              tipoTeclado: TextInputType.number,
+              validador: _obrigatorio,
+            ),
+            WizardField(
+              rotulo: 'Numero',
+              dica: '1543',
+              controlador: _numero,
+              tipoTeclado: TextInputType.number,
+              validador: _obrigatorio,
+            ),
+            WizardField(
+              rotulo: 'Complemento',
+              dica: 'Apto, bloco...',
+              controlador: _complemento,
+              opcional: true,
+            ),
+          ],
+        );
+      case 2:
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            WizardField(
+              rotulo: 'Senha',
+              dica: 'Crie uma senha',
+              controlador: _senha,
+              senha: true,
+              validador: (v) {
+                if ((v ?? '').length < 6) {
+                  return 'A senha deve ter no minimo 6 caracteres.';
+                }
+                return null;
+              },
+            ),
+            WizardField(
+              rotulo: 'Confirmar senha',
+              dica: 'Repita a senha',
+              controlador: _confirmaSenha,
+              senha: true,
+              validador: (v) {
+                if (v != _senha.text) return 'As senhas nao conferem.';
+                return null;
+              },
+            ),
+          ],
+        );
+      default:
+        return _etapaBebeTermos();
+    }
+  }
+
+  Widget _etapaBebeTermos() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Confira seus dados',
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w700,
+            color: Color(0xFF09090B),
+          ),
+        ),
+        const SizedBox(height: 12),
+        _resumo('Nome', _nome.text),
+        _resumo('Email', _email.text),
+        _resumo('Telefone', _telefone.text),
+        _resumo('CEP', _cep.text),
+        const SizedBox(height: 20),
+        const Divider(color: WizardStepperCores.borda),
+        const SizedBox(height: 12),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          value: _temBebe,
+          onChanged: (v) => setState(() => _temBebe = v),
+          activeThumbColor: WizardStepperCores.azul,
+          title: const Text(
+            'Tenho um bebe',
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          ),
+          subtitle: const Text(
+            'Informe os dados do seu bebe (opcional).',
+            style: TextStyle(fontSize: 12.5, color: Color(0xFF71717A)),
+          ),
+        ),
+        if (_temBebe) ...[
+          const SizedBox(height: 12),
+          WizardField(
+            rotulo: 'Nome do bebe',
+            dica: 'Nome do bebe',
+            controlador: _nomeBebe,
+            validador: _obrigatorio,
+          ),
+          WizardField(
+            rotulo: 'Data de nascimento do bebe',
+            dica: 'DD/MM/AAAA',
+            controlador: _nascimentoBebe,
+            tipoTeclado: TextInputType.datetime,
+            validador: _obrigatorio,
+          ),
+        ],
+        const SizedBox(height: 4),
+        CheckboxListTile(
+          contentPadding: EdgeInsets.zero,
+          controlAffinity: ListTileControlAffinity.leading,
+          value: _aceitouTermos,
+          activeColor: WizardStepperCores.azul,
+          onChanged: (v) => setState(() => _aceitouTermos = v ?? false),
+          title: const Text(
+            'Li e aceito os termos de uso e a politica de privacidade.',
+            style: TextStyle(fontSize: 13.5),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _resumo(String rotulo, String valor) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 96,
+            child: Text(
+              rotulo,
+              style: const TextStyle(
+                fontSize: 13,
+                color: WizardStepperCores.textoSuave,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              valor.isEmpty ? '-' : valor,
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF09090B),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _rodapeFormulario() {
+    return Container(
+      color: WizardStepperCores.rodapeCard,
+      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          if (_etapa == 0)
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              style: TextButton.styleFrom(
+                foregroundColor: WizardStepperCores.textoSuave,
+                minimumSize: const Size(0, 44),
+              ),
+              child: const Text(
+                'Cancelar',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              ),
+            )
+          else
+            OutlinedButton.icon(
+              onPressed: _enviando ? null : () => _irParaEtapa(_etapa - 1),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: const Color(0xFF09090B),
+                backgroundColor: AppColors.white,
+                minimumSize: const Size(0, 44),
+                side: const BorderSide(color: WizardStepperCores.borda),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              icon: const Icon(Icons.chevron_left, size: 16),
+              label: const Text(
+                'Voltar',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              ),
+            ),
+          ElevatedButton(
+            onPressed: _enviando ? null : _continuar,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: WizardStepperCores.azul,
+              foregroundColor: AppColors.white,
+              minimumSize: const Size(0, 44),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: _enviando
+                ? const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: AppColors.white,
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      Text('Criando conta...'),
+                    ],
+                  )
+                : Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (_ultimaEtapa) ...[
+                        const Icon(Icons.check, size: 16),
+                        const SizedBox(width: 8),
+                        const Text(
+                          'Criar conta',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w600),
+                        ),
+                      ] else ...[
+                        const Text(
+                          'Continuar',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(width: 8),
+                        const Icon(Icons.chevron_right, size: 16),
+                      ],
+                    ],
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _cartaoSucesso() {
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 440),
+        child: Container(
+          padding: const EdgeInsets.all(32),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: WizardStepperCores.borda),
+          ),
+          child: Column(
+            children: [
+              Container(
+                width: 64,
+                height: 64,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFE8F0FB),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.check,
+                    size: 32, color: WizardStepperCores.azul),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Conta criada com sucesso!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: WizardStepperCores.azul,
+                ),
+              ),
+              const SizedBox(height: 12),
+              const Text(
+                'Seu cadastro foi concluido. Faca login para acessar a sua '
+                'conta e comecar a doar.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 13.5,
+                  height: 1.5,
+                  color: WizardStepperCores.textoSuave,
+                ),
+              ),
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: WizardStepperCores.azul,
+                    foregroundColor: AppColors.white,
+                    minimumSize: const Size(0, 44),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.login,
+                    (route) => false,
+                  ),
+                  child: const Text(
+                    'Voltar ao inicio',
+                    style:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  String? _obrigatorio(String? v) {
+    if ((v ?? '').trim().isEmpty) return 'Campo obrigatorio.';
+    return null;
+  }
 }

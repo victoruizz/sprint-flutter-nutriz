@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../widgets/app_drawer.dart';
 import '../../widgets/app_header.dart';
+import '../../widgets/content_container.dart';
+import '../../widgets/eva_fab.dart';
 import '../content/content_screen.dart';
 import '../donations/donations_screen.dart';
 import '../eva/eva_chat_screen.dart';
@@ -50,14 +52,13 @@ class _HomeShellState extends State<HomeShell> {
         onSelecionarAba: _irParaAba,
         onAbrirEva: _abrirEva,
       ),
-      body: IndexedStack(index: _index, children: telas),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _abrirEva,
-        backgroundColor: AppColors.teal,
-        foregroundColor: AppColors.white,
-        tooltip: 'Falar com a EVA',
-        child: const Icon(Icons.chat_bubble_outline),
+      // O conteudo das telas internas fica numa coluna com respiro lateral,
+      // como o `p-5` do Layout.tsx, em vez de colar nas bordas.
+      body: ContentContainer(
+        larguraMaxima: 1100,
+        child: IndexedStack(index: _index, children: telas),
       ),
+      floatingActionButton: EvaFab(onPressed: _abrirEva),
     );
   }
 }

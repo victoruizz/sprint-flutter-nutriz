@@ -21,6 +21,15 @@ class Artigo {
   final Color corCategoria;
   final Color fundoCategoria;
 
+  /// Data de publicacao, como no cabecalho do artigo no site.
+  final String data;
+
+  /// Mini biografia exibida ao pe do artigo.
+  final String autorBio;
+
+  /// Itens do bloco "O que voce vai aprender".
+  final List<String> aprendizados;
+
   final List<SecaoArtigo> secoes;
 
   const Artigo({
@@ -32,8 +41,20 @@ class Artigo {
     required this.imagem,
     required this.corCategoria,
     required this.fundoCategoria,
+    required this.data,
+    required this.autorBio,
+    required this.aprendizados,
     required this.secoes,
   });
 
   String get tempoLeitura => '$minutosLeitura min de leitura';
+
+  /// Iniciais do autor, usadas no avatar do artigo.
+  String get autorIniciais => autor
+      .split(' ')
+      .where((p) => p.length > 2)
+      .take(2)
+      .map((p) => p[0])
+      .join()
+      .toUpperCase();
 }

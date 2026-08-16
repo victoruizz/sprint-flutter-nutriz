@@ -6,6 +6,7 @@ import '../../core/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../data/mock_landing.dart';
 import '../../widgets/content_container.dart';
+import '../../widgets/eva_fab.dart';
 import '../../widgets/nutriz_logo.dart';
 import '../eva/eva_chat_screen.dart';
 import 'components/landing_articles.dart';
@@ -122,6 +123,12 @@ class _LandingScreenState extends State<LandingScreen> {
             ),
           ),
           _header(),
+          // FAB da EVA, presente em todas as telas do produto real.
+          Positioned(
+            right: 20,
+            bottom: 20,
+            child: EvaFab(onPressed: _abrirEva),
+          ),
         ],
       ),
     );

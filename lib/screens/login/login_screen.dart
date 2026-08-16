@@ -72,7 +72,11 @@ class _LoginScreenState extends State<LoginScreen> {
           SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(24, 48, 24, 32),
-              child: Form(
+              // `max-w-sm` do login do site: coluna estreita centralizada.
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 384),
+                  child: Form(
                 key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -122,6 +126,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ],
+                ),
+                  ),
                 ),
               ),
             ),

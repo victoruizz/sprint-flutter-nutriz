@@ -15,6 +15,13 @@ const Color _fundoAcolhimento = Color(0xFFFDF1F5);
 const Color _corCuidados = Color(0xFF3B82F6);
 const Color _fundoCuidados = Color(0xFFDBEAFE);
 
+const String _bioMariana =
+    'Pediatra e consultora em aleitamento materno, colaboradora da Rede '
+    'Brasileira de Bancos de Leite Humano ha 12 anos.';
+const String _bioEquipe =
+    'Equipe tecnica do banco de leite humano da Lactare, responsavel pela '
+    'triagem, coleta e orientacao das nutrizes doadoras.';
+
 const List<Artigo> artigosMock = [
   Artigo(
     titulo: 'Como armazenar e transportar seu leite com seguranca',
@@ -27,6 +34,14 @@ const List<Artigo> artigosMock = [
     imagem: 'assets/artigos/armazenamento-leite.jpg',
     corCategoria: _corAmamentacao,
     fundoCategoria: _fundoAmamentacao,
+    data: '12 de julho, 2026',
+    autorBio: _bioMariana,
+    aprendizados: [
+      'Qual frasco usar e como esterilizar',
+      'Prazos de congelamento do leite cru',
+      'Como completar o frasco em coletas diferentes',
+      'Transporte seguro ate o banco de leite',
+    ],
     secoes: [
       SecaoArtigo(
         subtitulo: 'O frasco ideal',
@@ -67,6 +82,14 @@ const List<Artigo> artigosMock = [
     imagem: 'assets/artigos/alimentacao-nutriz.jpg',
     corCategoria: _corNutricao,
     fundoCategoria: _fundoNutricao,
+    data: '28 de junho, 2026',
+    autorBio: _bioMariana,
+    aprendizados: [
+      'Por que nao existe dieta especial para doar',
+      'Como montar refeicoes variadas no dia a dia',
+      'Quanto de agua beber durante a lactacao',
+      'Quando uma restricao alimentar faz sentido',
+    ],
     secoes: [
       SecaoArtigo(
         subtitulo: 'Comida de verdade, sem dieta restritiva',
@@ -103,6 +126,13 @@ const List<Artigo> artigosMock = [
     imagem: 'assets/artigos/apoio-sem-doar.jpg',
     corCategoria: _corAcolhimento,
     fundoCategoria: _fundoAcolhimento,
+    data: '15 de junho, 2026',
+    autorBio: _bioEquipe,
+    aprendizados: [
+      'Como doar frascos de vidro esterilizados',
+      'O peso da divulgacao entre outras nutrizes',
+      'Formas de apoiar quem esta doando',
+    ],
     secoes: [
       SecaoArtigo(
         subtitulo: 'Doar frascos e divulgar',
@@ -131,6 +161,14 @@ const List<Artigo> artigosMock = [
     imagem: 'assets/artigos/higiene-ordenha.jpg',
     corCategoria: _corCuidados,
     fundoCategoria: _fundoCuidados,
+    data: '02 de junho, 2026',
+    autorBio: _bioEquipe,
+    aprendizados: [
+      'Como preparar o ambiente e as maos',
+      'Uso de touca e mascara na ordenha',
+      'Por que desprezar os primeiros jatos',
+      'Cuidados com o frasco depois da coleta',
+    ],
     secoes: [
       SecaoArtigo(
         subtitulo: 'Antes de comecar',
@@ -166,6 +204,13 @@ const List<Artigo> artigosMock = [
     imagem: 'assets/artigos/excesso-de-leite.jpg',
     corCategoria: _corAmamentacao,
     fundoCategoria: _fundoAmamentacao,
+    data: '20 de maio, 2026',
+    autorBio: _bioMariana,
+    aprendizados: [
+      'Como a producao se ajusta a demanda',
+      'Por que doar nao tira o leite do seu bebe',
+      'Quando procurar avaliacao profissional',
+    ],
     secoes: [
       SecaoArtigo(
         subtitulo: 'Producao por demanda',
@@ -194,6 +239,13 @@ const List<Artigo> artigosMock = [
     imagem: 'assets/artigos/triagem-doacao.jpg',
     corCategoria: _corCuidados,
     fundoCategoria: _fundoCuidados,
+    data: '08 de maio, 2026',
+    autorBio: _bioEquipe,
+    aprendizados: [
+      'Quais criterios de saude sao avaliados',
+      'Que exames costumam ser solicitados',
+      'Como funciona a triagem inicial',
+    ],
     secoes: [
       SecaoArtigo(
         subtitulo: 'Criterios gerais',
@@ -228,6 +280,13 @@ const List<Artigo> artigosMock = [
     imagem: 'assets/artigos/diario-doadora.jpg',
     corCategoria: _corAcolhimento,
     fundoCategoria: _fundoAcolhimento,
+    data: '25 de abril, 2026',
+    autorBio: _bioEquipe,
+    aprendizados: [
+      'Como foi o primeiro contato com o banco de leite',
+      'A rotina de ordenha no dia a dia',
+      'O que muda com a coleta domiciliar',
+    ],
     secoes: [
       SecaoArtigo(
         subtitulo: 'O comeco',
@@ -255,6 +314,14 @@ const List<Artigo> artigosMock = [
     imagem: 'assets/artigos/nutrientes-lactacao.jpg',
     corCategoria: _corNutricao,
     fundoCategoria: _fundoNutricao,
+    data: '10 de abril, 2026',
+    autorBio: _bioMariana,
+    aprendizados: [
+      'Boas fontes de ferro no dia a dia',
+      'Como favorecer a absorcao do ferro',
+      'Calcio e vitamina D durante a lactacao',
+      'Quando a suplementacao e indicada',
+    ],
     secoes: [
       SecaoArtigo(
         subtitulo: 'Ferro',
