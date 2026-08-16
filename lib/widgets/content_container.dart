@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 /// em telas maiores. O fundo continua ocupando a largura toda - so o conteudo
 /// e que fica contido, como no site.
 class ContentContainer extends StatelessWidget {
+  /// Largura de conteudo usada na maioria das secoes do site.
+  static const double larguraPadrao = 1200;
+
   final Widget child;
 
   /// Largura maxima do conteudo. O site usa 1200 na maioria das secoes e

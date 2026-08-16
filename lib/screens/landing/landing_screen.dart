@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../../core/routes.dart';
@@ -126,6 +128,18 @@ class _LandingScreenState extends State<LandingScreen> {
   }
 
   Widget _header() {
+    final larguraTela = MediaQuery.sizeOf(context).width;
+    final recuo = larguraTela >= 1024 ? 32.0 : 20.0;
+    // Largura explicita: dentro de um Positioned o Row nao recebia largura
+    // definida, entao Spacer/spaceBetween nao tinham espaco para distribuir e
+    // tudo ficava amontoado a esquerda.
+    final larguraConteudo =
+        math.min(larguraTela - recuo * 2, ContentContainer.larguraPadrao);
+
+    // No site a navegacao completa aparece a partir de lg e o botao de menu
+    // fica escondido (`lg:hidden`).
+    final navCompleta = larguraTela >= 1100;
+
     return Positioned(
       top: 0,
       left: 0,
@@ -135,37 +149,31 @@ class _LandingScreenState extends State<LandingScreen> {
         color: _rolou ? AppColors.heroNavy : Colors.transparent,
         child: SafeArea(
           bottom: false,
-          child: ContentContainer(
-            espacoAcima: 12,
-            espacoAbaixo: 12,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                // No site a navegacao completa aparece a partir de lg e o
-                // botao de menu fica escondido (`lg:hidden`).
-                final navCompleta = constraints.maxWidth >= 1100;
-
-                return Row(
+          child: Center(
+            child: SizedBox(
+              width: larguraConteudo,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const NutrizLogo(altura: 24),
-                    if (navCompleta) ...[
-                      // A pilula rola na horizontal se faltar espaco, para
-                      // nunca estourar a linha e sumir com o header.
+                    if (navCompleta)
+                      // Encolhe e rola caso a pilula nao caiba, em vez de
+                      // estourar a linha e cortar os botoes da direita.
                       Flexible(
-                        child: Center(
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: _navSecoes(),
-                          ),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: _navSecoes(),
                         ),
                       ),
-                      const SizedBox(width: 16),
-                      _acoesEntrada(context),
-                    ] else
+                    if (navCompleta)
+                      _acoesEntrada(context)
+                    else
                       _botaoMenu(),
                   ],
-                );
-              },
+                ),
+              ),
             ),
           ),
         ),
@@ -198,15 +206,17 @@ class _LandingScreenState extends State<LandingScreen> {
 
   /// Login e Cadastrar-se, os dois botoes a direita do header no site.
   Widget _acoesEntrada(BuildContext context) {
+    // Os botoes sao dimensionados pelo proprio estilo. Envolve-los num
+    // SizedBox so com altura faz cada um reportar largura ilimitada dentro do
+    // Row, o que comia todo o espaco do header e cortava o Cadastrar-se.
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          height: 44,
-          child: OutlinedButton(
+        OutlinedButton(
             style: OutlinedButton.styleFrom(
               foregroundColor: AppColors.white,
               backgroundColor: AppColors.white.withValues(alpha: 0.1),
+              minimumSize: const Size(0, 44),
               padding: const EdgeInsets.symmetric(horizontal: 20),
               side: BorderSide(color: AppColors.white.withValues(alpha: 0.15)),
               shape: RoundedRectangleBorder(
@@ -219,14 +229,12 @@ class _LandingScreenState extends State<LandingScreen> {
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
           ),
-        ),
         const SizedBox(width: 8),
-        SizedBox(
-          height: 44,
-          child: ElevatedButton(
+        ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.white,
               foregroundColor: AppColors.heroNavy,
+              minimumSize: const Size(0, 44),
               padding: const EdgeInsets.symmetric(horizontal: 24),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(999),
@@ -238,7 +246,6 @@ class _LandingScreenState extends State<LandingScreen> {
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
           ),
-        ),
       ],
     );
   }
